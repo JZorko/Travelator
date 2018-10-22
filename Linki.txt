@@ -1,0 +1,17 @@
+https://developers.google.com/maps/documentation/javascript/get-api-key
+https://www.youtube.com/watch?v=Zxf1mnP5zcw
+https://www.youtube.com/watch?v=pRiQeo17u6c
+https://www.w3schools.com/graphics/google_maps_reference.asp
+
+https://developers.google.com/maps/documentation/javascript/places-autocomplete
+https://www.youtube.com/watch?annotation_id=annotation_3160149123&feature=iv&src_vid=lSdM3yZkj1w&v=FuL-OX_O-vQ
+
+https://developers.google.com/maps/documentation/javascript/examples/geocoding-reverse
+https://developers.google.com/maps/documentation/javascript/info-windows-to-db
+
+https://developers.google.com/maps/documentation/javascript/examples/control-simple
+
+https://developers.google.com/maps/documentation/javascript/symbols
+
+https://www.youtube.com/watch?v=QuuL29iiOn0
+https://www.youtube.com/watch?v=ZE8ODPL2VPI
