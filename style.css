@@ -57,9 +57,11 @@ body {
 	top: 0;
 	bottom: 0;
   width: 15%;
+  min-width: 250px;
 	height: 100%;
   box-shadow: 0 0 20px var(--shadow);
 	display: inline-block;
+  z-index: 1;
 }
 
 #map {
@@ -72,6 +74,7 @@ body {
 	width: 100%;
 	padding-left: 15%;
 	overflow: hidden;
+  z-index: 2;
 }
 
 nav {
