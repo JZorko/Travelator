@@ -56,10 +56,12 @@ body {
 	left: 0;
 	top: 0;
 	bottom: 0;
-  width: 250px;
+  width: 15%;
+  min-width: 250px;
 	height: 100%;
   box-shadow: 0 0 20px var(--shadow);
 	display: inline-block;
+  z-index: 1;
 }
 
 #map {
@@ -70,8 +72,9 @@ body {
 #mapContainer {
 	height: 100%;
 	width: 100%;
-	padding-left: 250px;
+	padding-left: 15%;
 	overflow: hidden;
+  z-index: 2;
 }
 
 nav {
