@@ -7,7 +7,8 @@ function initMap() {
 	var directionService = new google.maps.DirectionsService;
 	var directionDisplay = new google.maps.DirectionsRenderer;
 	var map = new google.maps.Map(document.getElementById('map'), options);
-  var acOptions = {
+	directionDisplay.setMap(map);
+	var acOptions = {
   	types: ['establishment']
   };
   var origin = new google.maps.places.Autocomplete(document.getElementById('origin'));
@@ -100,12 +101,11 @@ function initMap() {
 	}
 	document.getElementById('btn_cal').onclick= function () {
 		var request = {
-			origin: marker_origin.latLng,
-			destination: marker_destination.latLng,
+			origin: marker_origin.getPosition(),
+			destination: marker_destination.getPosition(),
 			travelMode: 'DRIVING'
 		};
-		directionService.route(request, function(result, status){
-			console.log(result, status);
+		directionService.route(request, function(result, status){			
 			if (status == "OK"){
 				directionDisplay.setDirections(result);
 			}
