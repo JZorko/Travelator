@@ -4,6 +4,8 @@ function initMap() {
 		disableDefaultUI: true,
 		zoomControl: true,
 	}
+	var directionService = new google.maps.DirectionsService;
+	var directionDisplay = new google.maps.DirectionsRenderer;
 	var map = new google.maps.Map(document.getElementById('map'), options);
   var acOptions = {
   	types: ['establishment']
@@ -97,7 +99,17 @@ function initMap() {
 		modal_reg.style.display = "none";
 	}
 	document.getElementById('btn_cal').onclick= function () {
-		
+		var request = {
+			origin: marker_origin.latLng,
+			destination: marker_destination.latLng,
+			travelMode: 'DRIVING'
+		};
+		directionService.route(request, function(result, status){
+			console.log(result, status);
+			if (status == "OK"){
+				directionDisplay.setDirections(result);
+			}
+		})
 	}
 
 }
