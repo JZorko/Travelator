@@ -60,7 +60,6 @@ body {
 	height: 100%;
   box-shadow: 0 0 20px var(--shadow);
 	display: inline-block;
-	z-index: 1;
 }
 
 #map {
@@ -71,7 +70,7 @@ body {
 #mapContainer {
 	height: 100%;
 	width: 100%;
-	margin-left: 250px;
+	padding-left: 250px;
 	overflow: hidden;
 }
 
@@ -107,6 +106,9 @@ html, body {
 #login {
     position: relative;
     float: right;
+}
+#btn_log, #btn_reg, #btn_cal {
+  cursor: pointer;
 }
 
 * {box-sizing: border-box;}
@@ -177,7 +179,8 @@ input[type=submit]:hover, button:hover {
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    padding-top: 50px;
+    border: 5px solid blue;
+
 }
 
 /* Modal Content/Box */
