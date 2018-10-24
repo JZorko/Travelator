@@ -13,59 +13,56 @@
 	</head>
 	<body>
 
-		<nav>
-			<div id="register">
-				<div id="registerForm" class="modal">
-				  <form class="modal-content" action="/action_page.php">
-				    <div class="container">
-				      <h1>Register</h1>
-				      <p>Please fill in this form to create an account.</p>
-				      <hr>
-				      <label for="email"><b>Email</b></label>
-				      <input type="text" placeholder="Enter Email" name="email" required>
+	<div id="register">
+		<div id="registerForm" class="modal">
+		  <form class="modal-content" action="/action_page.php">
+		    <div class="container">
+		      <h1>Register</h1>
+		      <p>Please fill in this form to create an account.</p>
+		      <hr>
+		      <label for="email"><b>Email</b></label>
+		      <input type="text" placeholder="Enter Email" name="email" required>
 
-				      <label for="psw"><b>Password</b></label>
-				      <input type="password" placeholder="Enter Password" name="psw" required>
+		      <label for="psw"><b>Password</b></label>
+		      <input type="password" placeholder="Enter Password" name="psw" required>
 
-							<button type="submit">Register</button>
-						</div>
-
-							<div class="container" style="background-color:#f1f1f1">
-								<button type="button" onclick="document.getElementById('registerForm').style.display='none'"
-									class="cancelbtn">Cancel</button>
-					    </div>
-				  </form>
+					<button type="submit">Register</button>
 				</div>
-			</div>
 
-			<div id="login">
-				<div id="loginForm" class="modal">
-				  <form class="modal-content" action="/action_page.php">
-				    <div class="container">
-				    	<h1>Login</h1>
-				    	<p>Please fill in this form to login.</p>
-    					<hr>
-							<label for="uname"><b>Username</b></label>
-							<input type="text" placeholder="Enter Username" name="uname" required>
-
-							<label for="psw"><b>Password</b></label>
-							<input type="password" placeholder="Enter Password" name="psw" required>
-
-							<button type="submit">Login</button>
-				    </div>
-				    <div class="container" style="background-color:#f1f1f1">
-				      <button type="button" onclick="document.getElementById('loginForm').style.display='none'"
+					<div class="container" style="background-color:#f1f1f1">
+						<button type="button" onclick="document.getElementById('registerForm').style.display='none'"
 							class="cancelbtn">Cancel</button>
-				    </div>
-				  </form>
-				</div>
-			</div>
-		</nav>
+			    </div>
+		  </form>
+		</div>
+	</div>
+
+	<div id="login">
+		<div id="loginForm" class="modal">
+		  <form class="modal-content" action="/action_page.php">
+		    <div class="container">
+		    	<h1>Login</h1>
+		    	<p>Please fill in this form to login.</p>
+					<hr>
+					<label for="uname"><b>Username</b></label>
+					<input type="text" placeholder="Enter Username" name="uname" required>
+
+					<label for="psw"><b>Password</b></label>
+					<input type="password" placeholder="Enter Password" name="psw" required>
+
+					<button type="submit">Login</button>
+		    </div>
+		    <div class="container" style="background-color:#f1f1f1">
+		      <button type="button" onclick="document.getElementById('loginForm').style.display='none'"
+					class="cancelbtn">Cancel</button>
+		    </div>
+		  </form>
+		</div>
+	</div>
 
 		<aside id="sidebar">
       <p id="title">
         Travelator
-				<?php print "php works" ?>
       </p>
       <div>
         <h4 class="header"> Distance </h4>
