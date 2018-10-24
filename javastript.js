@@ -121,17 +121,20 @@ function initMap() {
 		Register();
 		return false;
 	});
+
+	$('#logForm').submit(function () {
+		Login();
+		return false;
+	});
 }
 
 function Register(){
 	var username = document.getElementById("regUsr").value;
 	var password = document.getElementById("regPsw").value;
 
-	alert("Username: " + username + "\nPassword: " + password);
-
 	$.ajax({
-    'url': 'registracija.php',
-    'type': 'GET',
+    'url': 'register.php',
+    'type': 'POST',
     'dataType': 'json',
     'data': {username: username, password: password},
     'success': function(data)
@@ -141,6 +144,7 @@ function Register(){
 					if(data.added)
 					{
 						console.log("User registered.")
+						document.getElementById('registerForm').style.display = "none";
 					}
 					else
 					{
@@ -163,4 +167,37 @@ function Register(){
 function Login(){
 	var username = document.getElementById("logUsr").value;
 	var password = document.getElementById("logPsw").value;
+
+	$.ajax({
+    'url': 'login.php',
+    'type': 'POST',
+    'dataType': 'json',
+    'data': {username: username, password: password},
+    'success': function(data)
+			{
+				if(data.status)
+				{
+					if(data.accepted)
+					{
+						console.log("User logged in.")
+						document.getElementById('loginForm').style.display = "none";
+						document.getElementById('noLoginAccount').style.display = "none";
+						document.getElementById('loginAccount').style.display = "block";
+					}
+					else
+					{
+						console.log("User not logged in.")
+					}
+				}
+			},
+    'beforeSend': function()
+			{
+				console.log("Logging in.")
+			},
+    'error': function(data)
+      {
+      // this is what happens if the request fails.
+      	console.log(data);
+    	}
+	});
 }

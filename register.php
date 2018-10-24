@@ -1,5 +1,5 @@
 <?php
-  if(isset($_GET["username"]) && isset($_GET["password"])) {
+  if(isset($_POST["username"]) && isset($_POST["password"])) {
     $conn = new mysqli("localhost", "root", "", "travelator");
 
     if ($conn->connect_error) {
@@ -10,8 +10,8 @@
     $sql = sprintf(
        "INSERT INTO Uporabniki (username, password)
         VALUES ('%s', '%s')",
-          $_GET["username"],
-          password_hash($_GET["password"], PASSWORD_DEFAULT));
+          $_POST["username"],
+          password_hash($_POST["password"], PASSWORD_DEFAULT));
 
     if ($conn->query($sql) === TRUE) {
       $conn->close();
