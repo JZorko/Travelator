@@ -78,15 +78,6 @@ body {
   z-index: 1;
 }
 
-nav {
-  position: fixed;
-  width: 70%;
-  top: 0;
-  right: 0;
-  z-index: 1;
-  overflow: auto;
-}
-
 html, body {
 	height: 100%;
 	margin: 0;
@@ -167,12 +158,11 @@ input[type=submit]:hover, button:hover {
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 10; /* Sit on top */
+    z-index: 3; /* Sit on top */
     left: 0;
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    border: 5px solid blue;
 }
 
 /* Modal Content/Box */

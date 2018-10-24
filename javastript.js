@@ -34,31 +34,6 @@ function initMap() {
   	marker_destination.setPosition(place.geometry.location);
   	map.setCenter(place.geometry.location);
 	});
-
-	/*google.maps.event.addListener(marker, 'click', function(event){
-			infoWindow.setContent('kliknil si me ');
-			infoWindow.open(map, marker);
-    		map.setCenter(event.latLng);
-    	}
-    );
-    google.maps.event.addListener(map, 'click', function(event){
-    		addMarker({coords:event.latLng});
-    		map.setCenter(event.latLng);
-    	}
-    );*/
-    /*function calculateRoute() {
-		var request = {
-			origin: a,
-			destination: b,
-			travelMode: 'DRIVING'
-		};
-		directionService.route(request, function(result, status){
-			console.log(result, status);
-			if (status == "OK"){
-				directionDisplay.setDirections(result);
-			}
-		})
-	}*/
   if (navigator.geolocation) {
     	navigator.geolocation.getCurrentPosition(
     		function(position) {
@@ -76,9 +51,7 @@ function initMap() {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
-
   // This event listener calls addMarker() when the map is clicked.
-
   var modal_reg = document.getElementById('registerForm');
 	var modal_log = document.getElementById('loginForm');
 	// When the user clicks anywhere outside of the modal, close it
@@ -105,11 +78,10 @@ function initMap() {
 			destination: marker_destination.getPosition(),
 			travelMode: 'DRIVING'
 		};
-		directionService.route(request, function(result, status){			
+		directionService.route(request, function(result, status){
 			if (status == "OK"){
 				directionDisplay.setDirections(result);
 			}
-		})
+		});
 	}
-
 }
