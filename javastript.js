@@ -182,9 +182,16 @@ function Login(){
 					if(data.accepted)
 					{
 						console.log("User logged in.")
-						document.getElementById('loginForm').style.display = "none";
-						document.getElementById('noLoginAccount').style.display = "none";
-						document.getElementById('loginAccount').style.display = "block";
+						var loginElements = document.getElementsByClassName("login");
+						var i;
+						for(i = 0; i < elements.length; i++){
+							elements[i].style.display = "block";
+						}
+						var noLoginElements = document.getElementsByClassName("noLogin");
+						var i;
+						for(i = 0; i < elements.length; i++){
+							elements[i].style.display = "none";
+						}
 					}
 					else
 					{
@@ -202,4 +209,17 @@ function Login(){
       	console.log(data);
     	}
 	});
+}
+
+function Logout(){
+	console.log("User logged out.")
+	var loginElements = document.getElementsByClassName("login");
+	var i;
+	for(i = 0; i < elements.length; i++){
+		elements[i].style.display = "none";
+	}
+	var noLoginElements = document.getElementsByClassName("noLogin");
+	var i;
+	for(i = 0; i < elements.length; i++){
+		elements[i].style.display = "block";
 }

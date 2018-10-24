@@ -89,14 +89,15 @@
 					</ul>
 
       </div>
-			<div id="noLoginAccount">
+			<div class="noLogin">
         <h4 class="header">Account</h4>
         <ul>
           <li id="btn_log">Login</li>
           <li id="btn_reg">Register</li>
         </ul>
       </div>
-			<div id="loginAccount">
+
+			<div class="login">
         <h4 class="header">Account</h4>
         <ul>
           <li id="btn_logout">Logout</li>

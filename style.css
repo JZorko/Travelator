@@ -64,9 +64,10 @@ body {
   z-index: 2;
 }
 
-#loginAccount {
+.login {
   display: none;
 }
+
 
 #map {
 	position: relative;
