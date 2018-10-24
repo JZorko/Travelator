@@ -126,6 +126,7 @@ function initMap() {
 		Login();
 		return false;
 	});
+
 	$('#vnoForm').submit(function () {
 		Vnos();
 		return false;
@@ -232,7 +233,7 @@ function Vnos(){
 	var name = Number(document.getElementById("carName").value);
 	var consumption = document.getElementById("consumption").value;
 
-	console.log("Consumption: " + number);
+	console.log("Consumption: " + consumption);
 
 	$.ajax({
     'url': 'register.php',
