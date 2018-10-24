@@ -1,18 +1,22 @@
 <?php
+  session_start();
+
   if(isset($_POST["name"]) && isset($_POST["consumption"])) {
     $conn = new mysqli("localhost", "root", "", "travelator");
 
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
-      return json_encode(array("status" => false, "added" => false));
+      echo json_encode(array("status" => false, "added" => false));
     }
 
     $sql = sprintf(
-       "INSERT INTO Avtomobili (username, naziv, poraba)
-        VALUES ('%s', '%s', '%s')",
-          $_SESSION["username"],
+       "INSERT INTO avtomobili (username, naziv, poraba)
+        VALUES (%s, %s, %s)",
+          $_POST["username"],
           $_POST["name"],
           $_POST["consumption"]);
+
+    echo $sql;
 
     if ($conn->query($sql) === TRUE) {
       $conn->close();
@@ -22,5 +26,8 @@
       $conn->close();
       echo json_encode(array("status" => true, "added" => false));
     }
+  }
+  else {
+    echo json_encode(array("status" => false, "added" => false));
   }
 ?>

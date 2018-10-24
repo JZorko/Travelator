@@ -18,9 +18,7 @@
 
     if(!is_null($data)){
       if(password_verify($_POST["password"], $data["password"]) && $_POST["username"] == $data["username"]) {
-        $_SESSION["isLoggedIn"] = true;
-        $_SESSION["username"] = $_POST["username"];
-        echo json_encode(array("status" => true, "accepted" => true));
+        echo json_encode(array("status" => true, "accepted" => true, "username" => $_POST["username"]));
       }
       else {
         echo json_encode(array("status" => true, "accepted" => false));
