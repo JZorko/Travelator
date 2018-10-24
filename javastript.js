@@ -62,7 +62,7 @@ function initMap() {
 	});
 	destination_enter.addEventListener("keyup", function(event) {
     event.preventDefault();
-    if (event.keyCode === 13 && marker_origin.getVisible() == true) {			
+    if (event.keyCode === 13 && marker_origin.getVisible() == true) {
 			Calculate();
   }
 	});
@@ -236,14 +236,15 @@ function Logout(){
 }
 
 function Vnos(){
-	var name = Number(document.getElementById("carName").value);
+	var name = document.getElementById("carName").value;
 	var consumption = document.getElementById("consumption").value;
 
+	console.log("Name: " + name);
 	console.log("Consumption: " + consumption);
 	console.log("Username: " + user);
 
 	$.ajax({
-    'url': 'register.php',
+    'url': 'vnos.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: user, name: name, consumption: consumption},
