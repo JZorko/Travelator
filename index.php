@@ -128,7 +128,7 @@
 			<div class="login">
         <h4 class="header">Account</h4>
         <ul>
-          <li id="btn_logout">Logout</li>
+          <li onclick="Logout()">Logout</li>
         </ul>
       </div>
 

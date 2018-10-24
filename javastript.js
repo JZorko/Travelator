@@ -190,6 +190,7 @@ function Login(){
 						for(i = 0; i < noLoginElements.length; i++){
 							noLoginElements[i].style.display = "none";
 						}
+						document.getElementById('loginForm').style.display = "none";
 					}
 					else
 					{
