@@ -71,30 +71,6 @@
 		<aside id="sidebar">
       <p id="title">
         Travelator
-			  <?php
-					/*
-					$conn = new mysqli("localhost", "root", "", "travelator");
-
-			    if ($conn->connect_error) {
-			      die("Connection failed: " . $conn->connect_error);
-			    }
-
-					$sql = sprintf(
-			       "INSERT INTO Uporabniki (username, password)
-			        VALUES ('%s', '%s')",
-			          "jan",
-			          password_hash("zorko", PASSWORD_DEFAULT));
-
-			    if ($conn->query($sql) === TRUE) {
-			      $conn->close();
-			      print("SQL success.");
-			    }
-			    else {
-			      $conn->close();
-			      print("SQL error.");
-			    }
-					*/
-				?>
       </p>
       <div>
         <h4 class="header"> Distance </h4>
@@ -113,11 +89,17 @@
 					</ul>
 
       </div>
-			<div>
-        <h4 class="header"> Account </h4>
+			<div id="noLoginAccount">
+        <h4 class="header">Account</h4>
         <ul>
           <li id="btn_log">Login</li>
           <li id="btn_reg">Register</li>
+        </ul>
+      </div>
+			<div id="loginAccount">
+        <h4 class="header">Account</h4>
+        <ul>
+          <li id="btn_logout">Logout</li>
         </ul>
       </div>
     </aside>

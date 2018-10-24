@@ -183,6 +183,8 @@ function Login(){
 					{
 						console.log("User logged in.")
 						document.getElementById('loginForm').style.display = "none";
+						document.getElementById('noLoginAccount').style.display = "none";
+						document.getElementById('loginAccount').style.display = "block";
 					}
 					else
 					{
