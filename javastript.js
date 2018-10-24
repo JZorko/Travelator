@@ -84,4 +84,51 @@ function initMap() {
 			}
 		});
 	}
+
+	$('#regForm').submit(function () {
+		Register();
+		return false;
+	});
+}
+
+function Register(){
+	var username = document.getElementById("regUsr").value;
+	var password = document.getElementById("regPsw").value;
+
+	alert("Username: " + username + "\nPassword: " + password);
+
+	$.ajax({
+    'url': 'registracija.php',
+    'type': 'GET',
+    'dataType': 'json',
+    'data': {username: username, password: password},
+    'success': function(data)
+			{
+				if(data.status)
+				{
+					if(data.added)
+					{
+						console.log("User registered.")
+					}
+					else
+					{
+						console.log("User not registered.")
+					}
+				}
+			},
+    'beforeSend': function()
+			{
+				console.log("Registering user.")
+			},
+    'error': function(data)
+      {
+      // this is what happens if the request fails.
+      	console.log(data);
+    	}
+	});
+}
+
+function Login(){
+	var username = document.getElementById("logUsr").value;
+	var password = document.getElementById("logPsw").value;
 }

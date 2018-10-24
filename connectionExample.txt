@@ -1,4 +1,4 @@
-$conn = new mysqli("localhost", "user", "user", "Travelator");
+$conn = new mysqli("localhost", "user", "user", "travelator");
 
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
