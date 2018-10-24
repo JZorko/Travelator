@@ -68,16 +68,16 @@
 
 	<div id="vnos">
 		<div id="vnosForm" class="modal">
-		  <form id="vnoForm" class="modal-content" onsubmit="AddCar()" method="post">
+		  <form id="vnoForm" class="modal-content" method="post">
 		    <div class="container">
 		    	<h1>Add a car</h1>
 		    	<p>Please fill in this form to add a car.</p>
 					<hr>
 					<label for="name"><b>Name</b></label>
-					<input type="text" placeholder="Enter name for your car" name="name" id="name" required>
+					<input type="text" placeholder="Enter name for your car" name="name" id="carName" required>
 
 					<label for="consum"><b>Consumption</b></label>
-					<input type="text" placeholder="Enter consumption of your car (l/km)" name="consum" id="consum" pattern="[0-9]+([.,][0-9])*[0-9]*"required>
+					<input type="text" placeholder="Enter consumption of your car (l/km)" name="consum" id="consumption" pattern="[0-9]+([.,][0-9])*[0-9]*"required>
 
 					<button type="submit">Add</button>
 		    </div>
