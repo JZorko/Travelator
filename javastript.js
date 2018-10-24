@@ -126,6 +126,10 @@ function initMap() {
 		Login();
 		return false;
 	});
+	$('#vnoForm').submit(function () {
+		Vnos();
+		return false;
+	});
 }
 
 function Register(){
@@ -222,4 +226,42 @@ function Logout(){
 	for(i = 0; i < noLoginElements.length; i++){
 		noLoginElements[i].style.display = "block";
 	}
+}
+
+function Vnos(){
+	var name = Number(document.getElementById("carName").value);
+	var consumption = document.getElementById("consumption").value;
+
+	console.log("Consumption: " + number);
+
+	$.ajax({
+    'url': 'register.php',
+    'type': 'POST',
+    'dataType': 'json',
+    'data': {naziv: name, poraba: consumption},
+    'success': function(data)
+			{
+				if(data.status)
+				{
+					if(data.added)
+					{
+						console.log("Car added.")
+						document.getElementById('vnosForm').style.display = "none";
+					}
+					else
+					{
+						console.log("Car not added.")
+					}
+				}
+			},
+    'beforeSend': function()
+			{
+				console.log("Adding car.")
+			},
+    'error': function(data)
+      {
+      // this is what happens if the request fails.
+      	console.log(data);
+    	}
+	});
 }
