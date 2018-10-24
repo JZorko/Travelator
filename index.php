@@ -106,6 +106,18 @@
 							<input type="text" placeholder="Enter a location" name="destination" id="destination" required>
 						</li>
 
+						<!--<h5 class="header">Car</h5>
+						<li class="noPadding">
+							<div class="dropdown">
+								<button class="dropbtn">Dropdown</button>
+								<div class="dropdown-content">
+								  <a href="#">Link 1</a>
+								  <a href="#">Link 2</a>
+								  <a href="#">Link 3</a>
+								</div>
+							</div>
+						</li>-->
+
 						<li id="btn_cal">Calculate</li>
 					</ul>
 
@@ -128,7 +140,7 @@
 			<div class="login">
         <h4 class="header">Account</h4>
         <ul>
-          <li onclick="Logout()">Logout</li>
+          <li id="btn_logout" onclick="Logout()">Logout</li>
         </ul>
       </div>
 

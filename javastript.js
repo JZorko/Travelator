@@ -17,10 +17,12 @@ function initMap() {
 	destination.bindTo('bounds', map);
   var infoWindow = new google.maps.InfoWindow();
   var marker_origin = new google.maps.Marker({
-  	map: map
+  	map: map,
+		visible: true
   });
 	var marker_destination = new google.maps.Marker({
-  	map: map
+  	map: map,
+		visible: true
   });
 	function Calculate(){
 		var request = {
@@ -37,6 +39,8 @@ function initMap() {
 		});
 		/*alert(origin_value + "\n" + destination_value);*/
 	}
+	var destination_value;
+	var origin_value;
   google.maps.event.addListener(origin, 'place_changed', function () {
   	var place = origin.getPlace();
 		origin_value = document.getElementById('origin').value;
@@ -49,18 +53,16 @@ function initMap() {
   	marker_destination.setPosition(place.geometry.location);
   	map.setCenter(place.geometry.location);
 	});
-	var destination_value;
-	var origin_value;
 	var origin_enter = document.getElementById("origin");
 	var destination_enter = document.getElementById("destination");
 	origin_enter.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && marker_destination.getVisible() == true) {
 			Calculate();
     }
 	});
 	destination_enter.addEventListener("keyup", function(event) {
     event.preventDefault();
-    if (event.keyCode === 13) {
+    if (event.keyCode === 13 && marker_origin.getVisible() == true) {			
 			Calculate();
   }
 	});

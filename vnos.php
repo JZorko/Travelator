@@ -1,5 +1,5 @@
 <?php
-  if(isset($_POST["username"]) && isset($_POST["password"])) {
+  if(isset($_POST["name"]) && isset($_POST["consumption"])) {
     $conn = new mysqli("localhost", "root", "", "travelator");
 
     if ($conn->connect_error) {
