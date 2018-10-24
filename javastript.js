@@ -63,18 +63,7 @@ function initMap() {
     if (event.keyCode === 13) {
 			calculate();
   }
-	});
-	document.getElementById('origin').onchange=change;
-	document.getElementById('destination').onchange=change;
-	function change(e){
-	    if(!e){e=window.event;}
-			if(this.id == "origin" && destination_value != "undefined") {
-				calculate();
-			}
-			else if(this.id == "destination" && destination_value != "undefined") {
-				calculate();
-			}
-	}
+	});	
   if (navigator.geolocation) {
     	navigator.geolocation.getCurrentPosition(
     		function(position) {
@@ -115,5 +104,65 @@ function initMap() {
 	}
 	document.getElementById('btn_cal').onclick= function () {
 		calculate();
-	};
+	}
+
+	$('#regForm').submit(function () {
+		Register();
+		return false;
+	});
+}
+
+ function calculate() {
+	 var request = {
+		 origin: marker_origin.getPosition(),
+		 destination: marker_destination.getPosition(),
+		 travelMode: 'DRIVING'
+	 };
+	 directionService.route(request, function(result, status){
+		 if (status == "OK"){
+			 directionDisplay.setDirections(result);
+		 }
+	 });
+ }
+
+function Register(){
+	var username = document.getElementById("regUsr").value;
+	var password = document.getElementById("regPsw").value;
+
+	alert("Username: " + username + "\nPassword: " + password);
+
+	$.ajax({
+    'url': 'registracija.php',
+    'type': 'GET',
+    'dataType': 'json',
+    'data': {username: username, password: password},
+    'success': function(data)
+			{
+				if(data.status)
+				{
+					if(data.added)
+					{
+						console.log("User registered.")
+					}
+					else
+					{
+						console.log("User not registered.")
+					}
+				}
+			},
+    'beforeSend': function()
+			{
+				console.log("Registering user.")
+			},
+    'error': function(data)
+      {
+      // this is what happens if the request fails.
+      	console.log(data);
+    	}
+	});
+}
+
+function Login(){
+	var username = document.getElementById("logUsr").value;
+	var password = document.getElementById("logPsw").value;
 }

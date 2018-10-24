@@ -1,0 +1,15 @@
+$conn = new mysqli("localhost", "user", "user", "travelator");
+
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
+}
+
+$sql = "";
+
+if ($conn->query($sql) === TRUE) {
+    echo "Success!";
+}
+else {
+    echo "SQL error: " . $conn->error;
+}
+$conn->close();
