@@ -182,13 +182,13 @@ function Login(){
 						console.log("User logged in.")
 						var loginElements = document.getElementsByClassName("login");
 						var i;
-						for(i = 0; i < elements.length; i++){
-							elements[i].style.display = "block";
+						for(i = 0; i < loginElements.length; i++){
+							loginElements[i].style.display = "block";
 						}
 						var noLoginElements = document.getElementsByClassName("noLogin");
 						var i;
-						for(i = 0; i < elements.length; i++){
-							elements[i].style.display = "none";
+						for(i = 0; i < noLoginElements.length; i++){
+							noLoginElements[i].style.display = "none";
 						}
 					}
 					else
@@ -213,12 +213,12 @@ function Logout(){
 	console.log("User logged out.")
 	var loginElements = document.getElementsByClassName("login");
 	var i;
-	for(i = 0; i < elements.length; i++){
-		elements[i].style.display = "none";
+	for(i = 0; i < loginElements.length; i++){
+		loginElements[i].style.display = "none";
 	}
 	var noLoginElements = document.getElementsByClassName("noLogin");
 	var i;
-	for(i = 0; i < elements.length; i++){
-		elements[i].style.display = "block";
+	for(i = 0; i < noLoginElements.length; i++){
+		noLoginElements[i].style.display = "block";
 	}
 }

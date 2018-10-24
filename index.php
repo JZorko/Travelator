@@ -119,18 +119,19 @@
       </div>
 
 			<div class="login">
+				<h4 class="header">Cars</h4>
+				<ul>
+					<li id="btn_vnos">Add a Car</li>
+				</ul>
+			</div>
+
+			<div class="login">
         <h4 class="header">Account</h4>
         <ul>
           <li id="btn_logout">Logout</li>
         </ul>
       </div>
 
-			<div class="login">
-				<h4 class="header">Cars</h4>
-				<ul>
-					<li id="btn_vnos">Add a Car</li>
-				</ul>
-			</div>
     </aside>
 		<div id="mapContainer">
 			<div id="map"></div>
