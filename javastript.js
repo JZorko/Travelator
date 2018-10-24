@@ -22,18 +22,48 @@ function initMap() {
 	var marker_destination = new google.maps.Marker({
   	map: map
   });
+	function calculate(){
+		var request = {
+			origin: marker_origin.getPosition(),
+			destination: marker_destination.getPosition(),
+			travelMode: 'DRIVING'
+		};
+		directionService.route(request, function(result, status){
+			if (status == "OK"){
+				directionDisplay.setDirections(result);
+			} else {
+				alert("Something went wrong!");
+			}
+		});
+		/*alert(origin_value + "\n" + destination_value);*/
+	}
   google.maps.event.addListener(origin, 'place_changed', function () {
-  	infoWindow.close();
   	var place = origin.getPlace();
+		origin_value = document.getElementById('origin').value;
   	marker_origin.setPosition(place.geometry.location);
   	map.setCenter(place.geometry.location);
   });
 	google.maps.event.addListener(destination, 'place_changed', function () {
-  	infoWindow.close();
   	var place = destination.getPlace();
+		destination_value = document.getElementById('destination').value;
   	marker_destination.setPosition(place.geometry.location);
   	map.setCenter(place.geometry.location);
 	});
+	var destination_value;
+	var origin_value;
+	var origin_enter = document.getElementById("origin");
+	var destination_enter = document.getElementById("destination");
+	origin_enter.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+			calculate();
+    }
+	});
+	destination_enter.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+			calculate();
+  }
+	});	
   if (navigator.geolocation) {
     	navigator.geolocation.getCurrentPosition(
     		function(position) {
@@ -73,16 +103,7 @@ function initMap() {
 		modal_reg.style.display = "none";
 	}
 	document.getElementById('btn_cal').onclick= function () {
-		var request = {
-			origin: marker_origin.getPosition(),
-			destination: marker_destination.getPosition(),
-			travelMode: 'DRIVING'
-		};
-		directionService.route(request, function(result, status){
-			if (status == "OK"){
-				directionDisplay.setDirections(result);
-			}
-		});
+		calculate();
 	}
 
 	$('#regForm').submit(function () {
@@ -95,6 +116,19 @@ function initMap() {
 		return false;
 	});
 }
+
+ function calculate() {
+	 var request = {
+		 origin: marker_origin.getPosition(),
+		 destination: marker_destination.getPosition(),
+		 travelMode: 'DRIVING'
+	 };
+	 directionService.route(request, function(result, status){
+		 if (status == "OK"){
+			 directionDisplay.setDirections(result);
+		 }
+	 });
+ }
 
 function Register(){
 	var username = document.getElementById("regUsr").value;
