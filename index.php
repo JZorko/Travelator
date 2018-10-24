@@ -1,3 +1,7 @@
+<?php
+	session_start();
+?>
+
 <html>
 	<head>
 		<title>Geolocation</title>
@@ -43,7 +47,7 @@
 
 	<div id="login">
 		<div id="loginForm" class="modal">
-		  <form id="logForm" class="modal-content" onsubmit="Login()" method="post">
+		  <form id="logForm" class="modal-content" method="post">
 		    <div class="container">
 		    	<h1>Login</h1>
 		    	<p>Please fill in this form to login.</p>

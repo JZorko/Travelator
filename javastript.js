@@ -63,7 +63,7 @@ function initMap() {
     if (event.keyCode === 13) {
 			calculate();
   }
-	});	
+	});
   if (navigator.geolocation) {
     	navigator.geolocation.getCurrentPosition(
     		function(position) {
@@ -112,7 +112,7 @@ function initMap() {
 	});
 
 	$('#logForm').submit(function () {
-		Register();
+		Login();
 		return false;
 	});
 }
@@ -146,6 +146,7 @@ function Register(){
 					if(data.added)
 					{
 						console.log("User registered.")
+						document.getElementById('registerForm').style.display = "none";
 					}
 					else
 					{
@@ -181,6 +182,7 @@ function Login(){
 					if(data.accepted)
 					{
 						console.log("User logged in.")
+						document.getElementById('loginForm').style.display = "none";
 					}
 					else
 					{
