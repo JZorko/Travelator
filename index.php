@@ -27,10 +27,10 @@
 		      <h1>Register</h1>
 		      <p>Please fill in this form to create an account.</p>
 		      <hr>
-		      <label for="email"><b>Username</b></label>
+		      <label for="regUsr"><b>Username</b></label>
 		      <input type="text" placeholder="Enter Username" name="regUsr" id="regUsr" required>
 
-		      <label for="psw"><b>Password</b></label>
+		      <label for="regPsw"><b>Password</b></label>
 		      <input type="password" placeholder="Enter Password" name="regPsw" id="regPsw" required>
 
 					<input type="submit" value="Register">
@@ -50,7 +50,7 @@
 		    	<h1>Login</h1>
 		    	<p>Please fill in this form to login.</p>
 					<hr>
-					<label for="uname"><b>Username</b></label>
+					<label for="logUsr"><b>Username</b></label>
 					<input type="text" placeholder="Enter Username" name="logUsr" id="logUsr" required>
 
 					<label for="psw"><b>Password</b></label>
