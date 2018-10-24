@@ -83,15 +83,11 @@ html, body {
 	margin: 0;
 	padding: 0;
 }
-#register {
+#register, #login, #vnos{
     position: relative;
     float: right;
 }
-#login {
-    position: relative;
-    float: right;
-}
-#btn_log, #btn_reg, #btn_cal {
+#btn_log, #btn_reg, #btn_vnos, #btn_cal {
   cursor: pointer;
 }
 
