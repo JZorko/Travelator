@@ -169,6 +169,8 @@ function Register(){
 	});
 }
 
+var user = "";
+
 function Login(){
 	var username = document.getElementById("logUsr").value;
 	var password = document.getElementById("logPsw").value;
@@ -196,6 +198,8 @@ function Login(){
 							noLoginElements[i].style.display = "none";
 						}
 						document.getElementById('loginForm').style.display = "none";
+
+						user = data.username;
 					}
 					else
 					{
@@ -234,12 +238,13 @@ function Vnos(){
 	var consumption = document.getElementById("consumption").value;
 
 	console.log("Consumption: " + consumption);
+	console.log("Username: " + user);
 
 	$.ajax({
     'url': 'register.php',
     'type': 'POST',
     'dataType': 'json',
-    'data': {naziv: name, poraba: consumption},
+    'data': {username: user, name: name, consumption: consumption},
     'success': function(data)
 			{
 				if(data.status)
