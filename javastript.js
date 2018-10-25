@@ -48,11 +48,21 @@ function initMap() {
 		    },
 		    callback
 		);
+		/* 1.35 cena goriva*/
 		function callback(response, status) {
+				var cars = document.getElementById("avti");
+				var selected_car_consumption = cars.options[cars.selectedIndex].value;
 		    var liters = document.getElementById("liters");
 		    var euros = document.getElementById("euros");
 		    if(status=="OK") {
-		        var distance = response.rows[0].elements[0].distance.text;
+		        var distance = (response.rows[0].elements[0].distance.value) / 1000;
+						liters = (selected_car_consumption * distance) / 100;
+						euros = liters * 1.35;
+						document.getElementById("liters").innerHTML = "Consumption: " + Round(liters, 2) + " l";
+						document.getElementById("euros").innerHTML = "EST. cost: " + Round(euros, 2) + " €";
+
+
+
 		    } else {
 		        alert("Error: " + status);
 		    }
@@ -136,6 +146,7 @@ function initMap() {
 		modal_reg.style.display = "none";
 	}
 	document.getElementById('btn_cal').onclick= function () {
+		document.getElementById('calculation').style.display="block";
 		Calculate();
 	}
 
@@ -153,6 +164,10 @@ function initMap() {
 		Vnos();
 		return false;
 	});
+}
+
+function Round(value, decimals) {
+	return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
 }
 
 function Register(){
