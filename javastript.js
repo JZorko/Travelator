@@ -39,20 +39,23 @@ function initMap() {
 		});
 		var service = new google.maps.DistanceMatrixService();
 		service.getDistanceMatrix(
-		  {
-		    origins: marker_origin.getPosition(),
-		    destinations: marker_destination.getPosition(),
-				travelMode: google.maps.TravelMode.DRIVING,
-				unitSystem: google.maps.UnitSystem.METRIC
-		  }, callback);
+		    {
+		        origins: [marker_origin.getPosition()],
+		        destinations: [marker_destination.getPosition()],
+		        travelMode: google.maps.TravelMode.DRIVING,
+		        avoidHighways: false,
+		        avoidTolls: false
+		    },
+		    callback
+		);
 		function callback(response, status) {
-		  if (status == 'OK') {
-		    var origins = response.originAddresses;
-		    var destinations = response.destinationAddresses;
-        var distance = element.distance.text;
-				var distance_in_kilo = distance.value / 1000;
-				console.log(distance_in_kilo);
-		  }
+		    var liters = document.getElementById("liters");
+		    var euros = document.getElementById("euros");
+		    if(status=="OK") {
+		        var distance = response.rows[0].elements[0].distance.text;
+		    } else {
+		        alert("Error: " + status);
+		    }
 		}
 	}
 	var destination_value;
