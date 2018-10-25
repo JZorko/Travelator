@@ -102,7 +102,7 @@ function initMap() {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
-	
+
   // This event listener calls addMarker() when the map is clicked.
   var modal_reg = document.getElementById('registerForm');
 	var modal_log = document.getElementById('loginForm');
@@ -160,7 +160,7 @@ function Register(){
 	var password = document.getElementById("regPsw").value;
 
 	$.ajax({
-    'url': 'register.php',
+    'url': 'php/register.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: username, password: password},
@@ -198,7 +198,7 @@ function Login(){
 	var password = document.getElementById("logPsw").value;
 
 	$.ajax({
-    'url': 'login.php',
+    'url': 'php/login.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: username, password: password},
@@ -266,7 +266,7 @@ function Vnos(){
 	console.log("Consumption: " + consumption);
 
 	$.ajax({
-    'url': 'vnos.php',
+    'url': 'php/vnos.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: user, name: name, consumption: consumption},
@@ -300,7 +300,7 @@ function Vnos(){
 
 function ImportUserCars(){
 	$.ajax({
-    'url': 'avti.php',
+    'url': 'php/avti.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: user},
