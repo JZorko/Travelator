@@ -1,3 +1,6 @@
+var user = "";
+
+
 function initMap() {
 	var options = {
 		zoom: 12,
@@ -75,28 +78,32 @@ function initMap() {
   	marker_origin.setPosition(place.geometry.location);
   	map.setCenter(place.geometry.location);
   });
+
 	google.maps.event.addListener(destination, 'place_changed', function () {
   	var place = destination.getPlace();
 		destination_value = document.getElementById('destination').value;
   	marker_destination.setPosition(place.geometry.location);
   	map.setCenter(place.geometry.location);
 	});
-/* fix kdaj se aktivira in zdaj ne !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-	/*var origin_enter = document.getElementById("origin");
+
+	var origin_enter = document.getElementById("origin");
 	var destination_enter = document.getElementById("destination");
+
 	origin_enter.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13 && marker_destination.getVisible() == true) {
-			document.getElementById('calculation').style.display="block";
+    if (event.keyCode === 13 && marker_destination.getVisible() == true && destination_enter.value != "") {
 			Calculate();
+			if(user != "")
+				document.getElementById('calculation').style.display="block";
     }
 	});
 	destination_enter.addEventListener("keyup", function(event) {
     event.preventDefault();
-    if (event.keyCode === 13 && marker_origin.getVisible() == true) {
-			document.getElementById('calculation').style.display="block";
+    if (event.keyCode === 13 && marker_origin.getVisible() == true && origin_enter.value != "") {
 			Calculate();
+			if(user != "")
+				document.getElementById('calculation').style.display="block";
   }
-});*/
+});
   if (navigator.geolocation) {
     	navigator.geolocation.getCurrentPosition(
     		function(position) {
@@ -208,7 +215,6 @@ function Register(){
 	});
 }
 
-var user = "";
 
 function Login(){
 	var username = document.getElementById("logUsr").value;
