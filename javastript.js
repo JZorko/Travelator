@@ -60,9 +60,6 @@ function initMap() {
 						euros = liters * 1.35;
 						document.getElementById("liters").innerHTML = "Consumption: " + Round(liters, 2) + " l";
 						document.getElementById("euros").innerHTML = "EST. cost: " + Round(euros, 2) + " €";
-
-
-
 		    } else {
 		        alert("Error: " + status);
 		    }
@@ -86,12 +83,14 @@ function initMap() {
 	var destination_enter = document.getElementById("destination");
 	origin_enter.addEventListener("keyup", function(event) {
     if (event.keyCode === 13 && marker_destination.getVisible() == true) {
+			document.getElementById('calculation').style.display="block";
 			Calculate();
     }
 	});
 	destination_enter.addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.keyCode === 13 && marker_origin.getVisible() == true) {
+			document.getElementById('calculation').style.display="block";
 			Calculate();
   }
 	});
@@ -259,7 +258,8 @@ function Login(){
 }
 
 function Logout(){
-	console.log("User logged out.")
+	console.log("User logged out.");
+	document.getElementById('calculation').style.display="none";
 	var loginElements = document.getElementsByClassName("login");
 	var i;
 	for(i = 0; i < loginElements.length; i++){
