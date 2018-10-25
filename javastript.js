@@ -83,6 +83,7 @@ function initMap() {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
+	
   // This event listener calls addMarker() when the map is clicked.
   var modal_reg = document.getElementById('registerForm');
 	var modal_log = document.getElementById('loginForm');
