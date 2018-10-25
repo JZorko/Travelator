@@ -141,6 +141,10 @@ select {
   background-color: #f1f1f1;
 }
 
+#calculation {
+  display: none;
+}
+
 /*
 .dropbtn {
     background-color: #4CAF50;

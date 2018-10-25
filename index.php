@@ -119,16 +119,30 @@
 						</li>-->
 
 						<li id="btn_cal">Calculate</li>
-					</ul>
 
-      </div>
+
+					</ul>
+			</div>
+
+			<div id="calculation">
+				<h5 class="header">Calculation</h5>
+				<ul>
+					<li id="liters">
+						Consumption: ___ l/100km
+					</li>
+					<li id="euros">
+						Cost: ___ €
+					</li>
+				</ul>
+			</div>
+
 			<div class="noLogin">
         <h4 class="header">Account</h4>
         <ul>
           <li id="btn_log">Login</li>
           <li id="btn_reg">Register</li>
         </ul>
-      </div>
+			</div>
 
 			<div class="login">
 				<h4 class="header">Cars</h4>
