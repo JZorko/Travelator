@@ -202,6 +202,8 @@ function Login(){
 						document.getElementById('loginForm').style.display = "none";
 
 						user = data.username;
+
+						ImportUserCars();
 					}
 					else
 					{
@@ -265,6 +267,35 @@ function Vnos(){
 			},
     'beforeSend': function()
 			{
+				console.log("Adding car.");
+			},
+    'error': function(data)
+      {
+      // this is what happens if the request fails.
+      	console.log(data);
+    	}
+	});
+}
+
+function ImportUserCars(){
+	$.ajax({
+    'url': 'avti.php',
+    'type': 'POST',
+    'dataType': 'json',
+    'data': {username: user},
+    'success': function(data)
+			{
+
+				document.getElementById("avti").options[0] = new Option(data[0].naziv, data[0].poraba, true, false);
+
+				console.log(data);
+
+				for(var i =  1; i < data.length; i++){
+					document.getElementById("avti").options[i] = new Option(data[i].naziv, data[i].poraba, false, false);
+				}
+			},
+    'beforeSend': function()
+			{
 				console.log("Adding car.")
 			},
     'error': function(data)
@@ -273,4 +304,6 @@ function Vnos(){
       	console.log(data);
     	}
 	});
+
+
 }
