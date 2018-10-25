@@ -77,7 +77,7 @@
 					<input type="text" placeholder="Enter name for your car" name="name" id="carName" required>
 
 					<label for="consum"><b>Consumption</b></label>
-					<input type="text" placeholder="Enter consumption of your car (l/100km)" name="consum" id="consumption" pattern="[0-9]+([.,][0-9])*[0-9]*"required>
+					<input type="text" placeholder="Enter consumption of your car (l/100km)" name="consum" id="consumption" pattern="[0-9]+(.[0-9])*[0-9]*"required>
 
 					<button type="submit">Add</button>
 		    </div>
