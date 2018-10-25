@@ -56,10 +56,12 @@ function initMap() {
 		    var euros = document.getElementById("euros");
 		    if(status=="OK") {
 		        var distance = (response.rows[0].elements[0].distance.value) / 1000;
+						var kilo = response.rows[0].elements[0].distance.text;
 						liters = (selected_car_consumption * distance) / 100;
 						euros = liters * 1.35;
+						document.getElementById("distance").innerHTML = "Distance: " + kilo;
 						document.getElementById("liters").innerHTML = "Consumption: " + Round(liters, 2) + " l";
-						document.getElementById("euros").innerHTML = "EST. cost: " + Round(euros, 2) + " €";
+						document.getElementById("euros").innerHTML = "Est. cost: " + Round(euros, 2) + " €";
 		    } else {
 		        alert("Error: " + status);
 		    }
@@ -79,7 +81,8 @@ function initMap() {
   	marker_destination.setPosition(place.geometry.location);
   	map.setCenter(place.geometry.location);
 	});
-	var origin_enter = document.getElementById("origin");
+/* fix kdaj se aktivira in zdaj ne !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+	/*var origin_enter = document.getElementById("origin");
 	var destination_enter = document.getElementById("destination");
 	origin_enter.addEventListener("keyup", function(event) {
     if (event.keyCode === 13 && marker_destination.getVisible() == true) {
@@ -93,7 +96,7 @@ function initMap() {
 			document.getElementById('calculation').style.display="block";
 			Calculate();
   }
-	});
+});*/
   if (navigator.geolocation) {
     	navigator.geolocation.getCurrentPosition(
     		function(position) {

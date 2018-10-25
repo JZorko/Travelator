@@ -114,6 +114,7 @@
 			<div id="calculation">
 				<h5 class="header">Calculation</h5>
 				<ul>
+					<li id="distance"></li>
 					<li id="liters"></li>
 					<li id="euros"></li>
 				</ul>
