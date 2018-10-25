@@ -10,13 +10,11 @@
     }
 
     $sql = sprintf(
-       "INSERT INTO avtomobili (username, naziv, poraba)
-        VALUES (%s, %s, %s)",
+       "INSERT INTO Avtomobili (username, naziv, poraba)
+        VALUES ('%s', '%s', %s)",
           $_POST["username"],
           $_POST["name"],
           $_POST["consumption"]);
-
-    echo $sql;
 
     if ($conn->query($sql) === TRUE) {
       $conn->close();

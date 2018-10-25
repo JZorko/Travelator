@@ -239,9 +239,9 @@ function Vnos(){
 	var name = document.getElementById("carName").value;
 	var consumption = document.getElementById("consumption").value;
 
+	console.log("Username: " + user);
 	console.log("Name: " + name);
 	console.log("Consumption: " + consumption);
-	console.log("Username: " + user);
 
 	$.ajax({
     'url': 'vnos.php',
@@ -254,12 +254,12 @@ function Vnos(){
 				{
 					if(data.added)
 					{
-						console.log("Car added.")
+						console.log("Car added.");
 						document.getElementById('vnosForm').style.display = "none";
 					}
 					else
 					{
-						console.log("Car not added.")
+						console.log("Car not added.");
 					}
 				}
 			},
