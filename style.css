@@ -101,7 +101,7 @@ html, body {
 /* Full-width input fields */
 input[type=text], input[type=password] {
     width: 100%;
-    padding: 15px;
+    padding: 10px 15px;
     display: inline-block;
     border: none;
 		border-radius: 3px;
@@ -132,6 +132,15 @@ input[type=submit], button {
 input[type=submit]:hover, button:hover {
 		background-color: var(--shady);
 }
+
+select {
+  width: 100%;
+  padding: 10px 15px;
+  border-radius: 3px;
+  border: none;
+  background-color: #f1f1f1;
+}
+
 /*
 .dropbtn {
     background-color: #4CAF50;

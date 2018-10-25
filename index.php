@@ -132,8 +132,8 @@
 
 			<div class="login">
 				<h4 class="header">Cars</h4>
-				<select id="avti"></select>
 				<ul>
+					<li><select id="avti"></select></li>
 					<li id="btn_vnos">Add a Car</li>
 				</ul>
 			</div>

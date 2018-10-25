@@ -258,6 +258,7 @@ function Vnos(){
 					{
 						console.log("Car added.");
 						document.getElementById('vnosForm').style.display = "none";
+						ImportUserCars();
 					}
 					else
 					{
@@ -285,7 +286,6 @@ function ImportUserCars(){
     'data': {username: user},
     'success': function(data)
 			{
-
 				document.getElementById("avti").options[0] = new Option(data[0].naziv, data[0].poraba, true, false);
 
 				console.log(data);
