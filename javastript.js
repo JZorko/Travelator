@@ -37,7 +37,23 @@ function initMap() {
 				alert("Something went wrong!");
 			}
 		});
-		/*alert(origin_value + "\n" + destination_value);*/
+		var service = new google.maps.DistanceMatrixService();
+		service.getDistanceMatrix(
+		  {
+		    origins: marker_origin.getPosition(),
+		    destinations: marker_destination.getPosition(),
+				travelMode: google.maps.TravelMode.DRIVING,
+				unitSystem: google.maps.UnitSystem.METRIC
+		  }, callback);
+		function callback(response, status) {
+		  if (status == 'OK') {
+		    var origins = response.originAddresses;
+		    var destinations = response.destinationAddresses;
+        var distance = element.distance.text;
+				var distance_in_kilo = distance.value / 1000;
+				console.log(distance_in_kilo);
+		  }
+		}
 	}
 	var destination_value;
 	var origin_value;
@@ -140,7 +156,7 @@ function Register(){
 	var password = document.getElementById("regPsw").value;
 
 	$.ajax({
-    'url': 'php/register.php',
+    'url': 'register.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: username, password: password},
@@ -178,7 +194,7 @@ function Login(){
 	var password = document.getElementById("logPsw").value;
 
 	$.ajax({
-    'url': 'php/login.php',
+    'url': 'login.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: username, password: password},
@@ -246,7 +262,7 @@ function Vnos(){
 	console.log("Consumption: " + consumption);
 
 	$.ajax({
-    'url': 'php/vnos.php',
+    'url': 'vnos.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: user, name: name, consumption: consumption},
@@ -280,7 +296,7 @@ function Vnos(){
 
 function ImportUserCars(){
 	$.ajax({
-    'url': 'php/avti.php',
+    'url': 'avti.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: user},
