@@ -128,7 +128,7 @@
 				<h5 class="header">Calculation</h5>
 				<ul>
 					<li id="liters">
-						Consumption: ___ l/100km
+						Consumption: ___ l
 					</li>
 					<li id="euros">
 						Cost: ___ €
