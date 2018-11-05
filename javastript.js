@@ -94,21 +94,23 @@ function initMap() {
     if (event.keyCode === 13 && marker_destination.getVisible() == true && destination_enter.value != "") {
 			Calculate();
 			if(user != "" && liters != null)
+			{
 				document.getElementById('calculation').style.display="block";
 				Save();
 			}
-    }
+  	}
 	});
 	destination_enter.addEventListener("keyup", function(event) {
     event.preventDefault();
     if (event.keyCode === 13 && marker_origin.getVisible() == true && origin_enter.value != "") {
 			Calculate();
 			if(user != "" && liters != null)
+			{
 				document.getElementById('calculation').style.display="block";
 				Save();
 			}
-  }
-});
+  	}
+	});
   if (navigator.geolocation) {
     	navigator.geolocation.getCurrentPosition(
     		function(position) {
@@ -360,7 +362,7 @@ function ImportUserCars(){
 }
 
 function Save(){
-	var name = document.getElementById("carName").value;
+	var name = document.getElementById("avti").options[document.getElementById("avti").selectedIndex].text;
 	var origin = document.getElementById("origin").value;
 	var destination = document.getElementById("destination").value;
 

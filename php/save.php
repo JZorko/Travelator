@@ -15,12 +15,12 @@
     $sql = sprintf(
        "INSERT INTO Zgodovina (datum_vpogleda, id_avtomobila, username, zacetna_lokacija, koncna_lokacija)
         VALUES ('%s', %s, '%s', '%s', '%s')",
-          date("Y-m-d"),
+          date("Y-m-d H:i:s"),
           $data["id_avtomobila"],
           $_POST["username"],
           $_POST["origin"],
           $_POST["destination"]);
-
+              
     if ($conn->query($sql) === TRUE) {
       $conn->close();
       echo json_encode(array("status" => true, "added" => true));
