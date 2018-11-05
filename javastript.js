@@ -93,7 +93,10 @@ function initMap() {
     if (event.keyCode === 13 && marker_destination.getVisible() == true && destination_enter.value != "") {
 			Calculate();
 			if(user != "")
+			{
 				document.getElementById('calculation').style.display="block";
+				Save();
+			}
     }
 	});
 	destination_enter.addEventListener("keyup", function(event) {
@@ -101,7 +104,10 @@ function initMap() {
     if (event.keyCode === 13 && marker_origin.getVisible() == true && origin_enter.value != "") {
 			Calculate();
 			if(user != "")
+			{
 				document.getElementById('calculation').style.display="block";
+				Save();
+			}
   }
 });
   if (navigator.geolocation) {
@@ -155,8 +161,12 @@ function initMap() {
 		modal_reg.style.display = "none";
 	}
 	document.getElementById('btn_cal').onclick= function () {
-		document.getElementById('calculation').style.display="block";
 		Calculate();
+		if(user != "")
+		{
+			document.getElementById('calculation').style.display="block";
+			Save();
+		}
 	}
 
 	$('#regForm').submit(function () {
@@ -348,6 +358,45 @@ function ImportUserCars(){
       	console.log(data);
     	}
 	});
+}
 
+function Save(){
+	var name = document.getElementById("carName").value;
+	var origin = document.getElementById("origin").value;
+	var destination = document.getElementById("destination").value;
 
+	console.log("Username: " + user);
+	console.log("Name: " + name);
+	console.log("Origin: " + origin);
+	console.log("Destination: " + destination);
+
+	$.ajax({
+    'url': 'php/save.php',
+    'type': 'POST',
+    'dataType': 'json',
+    'data': {username:user, name, origin, destination},
+    'success': function(data)
+			{
+				if(data.status)
+				{
+					if(data.added)
+					{
+						console.log("Location saved.");
+					}
+					else
+					{
+						console.log("Location not saved.");
+					}
+				}
+			},
+    'beforeSend': function()
+			{
+				console.log("Saving location.");
+			},
+    'error': function(data)
+      {
+      // this is what happens if the request fails.
+      	console.log(data);
+    	}
+	});
 }
