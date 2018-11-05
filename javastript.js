@@ -157,8 +157,12 @@ function initMap() {
 	}
 	document.getElementById('btn_cal').onclick= function () {
 		Calculate();
+<<<<<<< HEAD
 		if(user != "" && liters != null)
 			document.getElementById('calculation').style.display="block";
+=======
+		document.getElementById('calculation').style.display="block";
+>>>>>>> a890e5279dac6738fe55d6357e1c973331f8bf62
 	}
 
 	$('#regForm').submit(function () {
