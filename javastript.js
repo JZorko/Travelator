@@ -69,6 +69,7 @@ function initMap() {
 		        alert("Error: " + status);
 		    }
 		}
+
 	}
 	var destination_value;
 	var origin_value;
@@ -155,8 +156,8 @@ function initMap() {
 		modal_reg.style.display = "none";
 	}
 	document.getElementById('btn_cal').onclick= function () {
-		document.getElementById('calculation').style.display="block";
 		Calculate();
+		document.getElementById('calculation').style.display="block";
 	}
 
 	$('#regForm').submit(function () {
