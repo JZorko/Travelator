@@ -27,6 +27,8 @@ function initMap() {
   	map: map,
 		visible: true
   });
+
+
 	function Calculate(){
 		var request = {
 			origin: marker_origin.getPosition(),
@@ -42,17 +44,18 @@ function initMap() {
 		});
 		var service = new google.maps.DistanceMatrixService();
 		service.getDistanceMatrix(
-		    {
-		        origins: [marker_origin.getPosition()],
-		        destinations: [marker_destination.getPosition()],
-		        travelMode: google.maps.TravelMode.DRIVING,
-		        avoidHighways: false,
-		        avoidTolls: false
-		    },
-		    callback
+	    {
+        origins: [marker_origin.getPosition()],
+        destinations: [marker_destination.getPosition()],
+        travelMode: google.maps.TravelMode.DRIVING,
+        avoidHighways: false,
+        avoidTolls: false
+	    },
+	    callback
 		);
 		/* 1.35 cena goriva*/
 		function callback(response, status) {
+			if(user != "" && origin_enter.value != "" && destination_enter.value != ""){
 				var cars = document.getElementById("avti");
 				var selected_car_consumption = cars.options[cars.selectedIndex].value;
 		    var liters = document.getElementById("liters");
@@ -68,9 +71,11 @@ function initMap() {
 		    } else {
 		        alert("Error: " + status);
 		    }
+			}
 		}
-
 	}
+
+
 	var destination_value;
 	var origin_value;
   google.maps.event.addListener(origin, 'place_changed', function () {
@@ -90,8 +95,11 @@ function initMap() {
 	var origin_enter = document.getElementById("origin");
 	var destination_enter = document.getElementById("destination");
 
-	origin_enter.addEventListener("keyup", function(event) {
-    if (event.keyCode === 13 && marker_destination.getVisible() == true && destination_enter.value != "") {
+	origin_enter.addEventListener("keypress", function(event) {
+		if(event.keyCode === 13)
+			event.preventDefault();
+
+		if (document.getElementsByClassName("pac-container")[0].style.display == "none" && document.getElementsByClassName("pac-container")[1].style.display == "none" && event.keyCode === 13 && marker_destination.getVisible() == true && destination_enter.value != "") {
 			Calculate();
 			if(user != "" && liters != null)
 			{
@@ -100,9 +108,10 @@ function initMap() {
 			}
   	}
 	});
-	destination_enter.addEventListener("keyup", function(event) {
-    event.preventDefault();
-    if (event.keyCode === 13 && marker_origin.getVisible() == true && origin_enter.value != "") {
+	destination_enter.addEventListener("keypress", function(event) {
+		if(event.keyCode === 13)
+			event.preventDefault();
+    if (document.getElementsByClassName("pac-container")[0].style.display == "none" && document.getElementsByClassName("pac-container")[1].style.display == "none" && event.keyCode === 13 && marker_origin.getVisible() == true && origin_enter.value != "") {
 			Calculate();
 			if(user != "" && liters != null)
 			{
