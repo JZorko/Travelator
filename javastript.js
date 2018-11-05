@@ -69,6 +69,7 @@ function initMap() {
 		        alert("Error: " + status);
 		    }
 		}
+
 	}
 	var destination_value;
 	var origin_value;
@@ -92,8 +93,7 @@ function initMap() {
 	origin_enter.addEventListener("keyup", function(event) {
     if (event.keyCode === 13 && marker_destination.getVisible() == true && destination_enter.value != "") {
 			Calculate();
-			if(user != "")
-			{
+			if(user != "" && liters != null)
 				document.getElementById('calculation').style.display="block";
 				Save();
 			}
@@ -103,8 +103,7 @@ function initMap() {
     event.preventDefault();
     if (event.keyCode === 13 && marker_origin.getVisible() == true && origin_enter.value != "") {
 			Calculate();
-			if(user != "")
-			{
+			if(user != "" && liters != null)
 				document.getElementById('calculation').style.display="block";
 				Save();
 			}
@@ -162,7 +161,7 @@ function initMap() {
 	}
 	document.getElementById('btn_cal').onclick= function () {
 		Calculate();
-		if(user != "")
+		if(user != "" && liters != null)
 		{
 			document.getElementById('calculation').style.display="block";
 			Save();
