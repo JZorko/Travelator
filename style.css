@@ -71,6 +71,11 @@ body {
   overflow-x: hidden;
   overflow-y: scroll;
   box-sizing: content-box;
+
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 .login {
