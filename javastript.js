@@ -176,6 +176,7 @@ function initMap() {
 		{
 			document.getElementById('calculation').style.display="block";
 			Save();
+			Locations();
 		}
 	}
 
@@ -402,6 +403,56 @@ function Save(){
     'beforeSend': function()
 			{
 				console.log("Saving location.");
+			},
+    'error': function(data)
+      {
+      // this is what happens if the request fails.
+      	console.log(data);
+    	}
+	});
+}
+
+function Locations(){
+	var origin = document.getElementById("origin").value;
+	var destination = document.getElementById("destination").value;
+
+	console.log("Username: " + user);
+	console.log("Origin: " + origin);
+	console.log("Destination: " + destination);
+
+	$.ajax({
+    'url': 'php/locations.php',
+    'type': 'POST',
+    'dataType': 'json',
+    'data': {username:user, origin, destination},
+    'success': function(data)
+			{
+				if(data.status_origin)
+				{
+					if(data.added)
+					{
+						console.log("Location from origin saved.");
+					}
+					else
+					{
+						console.log("Location from origin not saved.");
+					}
+				}
+				if(data.status_destination)
+				{
+					if(data.added)
+					{
+						console.log("Location from destination saved.");
+					}
+					else
+					{
+						console.log("Location from destination not saved.");
+					}
+				}
+			},
+    'beforeSend': function()
+			{
+				console.log("Adding locations.");
 			},
     'error': function(data)
       {
