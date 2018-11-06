@@ -202,6 +202,7 @@ function initMap(){
 			$(document.getElementById('mapContainer')).animate({
 	        paddingLeft:'500px'
 				})
+			document.getElementById('leftDiv').style.display = "block";
 			document.getElementById('btn_history').innerHTML = "Close history";
 		}
 		else {
@@ -211,7 +212,9 @@ function initMap(){
 			$(document.getElementById('mapContainer')).animate({
 	        paddingLeft:'250px'
 				})
+			document.getElementById('leftDiv').style.display = "none";
 			document.getElementById('btn_history').innerHTML = "Open history";
+
 		}
 	}
 

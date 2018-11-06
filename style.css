@@ -24,9 +24,14 @@ body {
   margin: 6px;
   background-color: var(--sidebarItemBackground);
 }
-#sidebar div {
+#rightDiv {
   float: right;
-  width: 238px;
+  width: 250px;
+}
+#leftDiv{
+  float: left;
+  width: 250px;
+  display: none;
 }
 #sidebar ul {
   padding: 0;
@@ -63,6 +68,7 @@ body {
 	display: inline-block;
   z-index: 2;
   background-color: var(--sidebarBackground);
+  overflow: scroll;
 }
 
 .login {

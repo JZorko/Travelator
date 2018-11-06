@@ -93,7 +93,28 @@
       <p id="title">
         Travelator
       </p>
-			<div>
+
+			<div id="leftDiv">
+				<div>
+					<h4 class="header">History</h4>
+					<ul>
+						<li>Sth</li>
+						<li>Sth</li>
+						<li>Sth</li>
+						<li>Sth</li>
+						<li>Sth</li>
+						<li>Sth</li>
+						<li>Sth</li>
+						<li>Sth</li>
+						<li>Sth</li>
+						<li>Sth</li>
+						<li>Sth</li>
+						<li>Sth</li>
+					</ul>
+				</div>
+			</div>
+
+			<div id="rightDiv">
 	      <div>
 	        <h4 class="header"> Distance </h4>
 						<ul>
