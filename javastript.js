@@ -1,7 +1,10 @@
 var user = "";
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-function initMap() {
+function initMap(){
 	var options = {
 		zoom: 12,
 		disableDefaultUI: true,
@@ -19,58 +22,55 @@ function initMap() {
   origin.bindTo('bounds', map);
 	destination.bindTo('bounds', map);
   var infoWindow = new google.maps.InfoWindow();
-  var marker_origin = new google.maps.Marker({
-  	map: map,
-		visible: true
-  });
-	var marker_destination = new google.maps.Marker({
-  	map: map,
-		visible: true
-  });
+
+  var marker_origin;
+	var marker_destination;
 
 
-	function Calculate(){
-		var request = {
-			origin: marker_origin.getPosition(),
-			destination: marker_destination.getPosition(),
-			travelMode: 'DRIVING'
-		};
-		directionService.route(request, function(result, status){
-			if (status == "OK"){
-				directionDisplay.setDirections(result);
-			} else {
-				alert("Something went wrong!");
-			}
-		});
-		var service = new google.maps.DistanceMatrixService();
-		service.getDistanceMatrix(
-	    {
-        origins: [marker_origin.getPosition()],
-        destinations: [marker_destination.getPosition()],
-        travelMode: google.maps.TravelMode.DRIVING,
-        avoidHighways: false,
-        avoidTolls: false
-	    },
-	    callback
-		);
-		/* 1.35 cena goriva*/
-		function callback(response, status) {
-			if(user != "" && origin_enter.value != "" && destination_enter.value != ""){
-				var cars = document.getElementById("avti");
-				var selected_car_consumption = cars.options[cars.selectedIndex].value;
-		    var liters = document.getElementById("liters");
-		    var euros = document.getElementById("euros");
-		    if(status=="OK") {
-		        var distance = (response.rows[0].elements[0].distance.value) / 1000;
-						var kilo = response.rows[0].elements[0].distance.text;
-						liters = (selected_car_consumption * distance) / 100;
-						euros = liters * 1.35;
-						document.getElementById("distance").innerHTML = "Distance: " + kilo;
-						document.getElementById("liters").innerHTML = "Consumption: " + Round(liters, 2) + " l";
-						document.getElementById("euros").innerHTML = "Est. cost: " + Round(euros, 2) + " €";
-		    } else {
-		        alert("Error: " + status);
-		    }
+	async function Calculate(){
+		if(marker_origin != null && marker_destination != null){
+			var request = {
+				origin: marker_origin.getPosition(),
+				destination: marker_destination.getPosition(),
+				travelMode: 'DRIVING'
+			};
+			directionService.route(request, function(result, status){
+				if (status == "OK"){
+					directionDisplay.setDirections(result);
+				} else {
+					alert("Something went wrong!");
+				}
+			});
+			var service = new google.maps.DistanceMatrixService();
+			service.getDistanceMatrix(
+		    {
+	        origins: [marker_origin.getPosition()],
+	        destinations: [marker_destination.getPosition()],
+	        travelMode: google.maps.TravelMode.DRIVING,
+	        avoidHighways: false,
+	        avoidTolls: false
+		    },
+		    callback
+			);
+			/* 1.35 cena goriva*/
+			function callback(response, status) {
+				if(user != "" && origin_enter.value != "" && destination_enter.value != ""){
+					var cars = document.getElementById("avti");
+					var selected_car_consumption = cars.options[cars.selectedIndex].value;
+			    var liters = document.getElementById("liters");
+			    var euros = document.getElementById("euros");
+			    if(status=="OK") {
+			        var distance = (response.rows[0].elements[0].distance.value) / 1000;
+							var kilo = response.rows[0].elements[0].distance.text;
+							liters = (selected_car_consumption * distance) / 100;
+							euros = liters * 1.35;
+							document.getElementById("distance").innerHTML = "Distance: " + kilo;
+							document.getElementById("liters").innerHTML = "Consumption: " + Round(liters, 2) + " l";
+							document.getElementById("euros").innerHTML = "Est. cost: " + Round(euros, 2) + " €";
+			    } else {
+			        alert("Error: " + status);
+			    }
+				}
 			}
 		}
 	}
@@ -81,25 +81,37 @@ function initMap() {
   google.maps.event.addListener(origin, 'place_changed', function () {
   	var place = origin.getPlace();
 		origin_value = document.getElementById('origin').value;
+
+		if(marker_origin == null)
+			marker_origin = new google.maps.Marker({map: map, visible: false});
   	marker_origin.setPosition(place.geometry.location);
+		marker_origin.setVisible();
+
   	map.setCenter(place.geometry.location);
   });
 
 	google.maps.event.addListener(destination, 'place_changed', function () {
   	var place = destination.getPlace();
 		destination_value = document.getElementById('destination').value;
-  	marker_destination.setPosition(place.geometry.location);
+
+		if(marker_destination == null)
+			marker_destination = new google.maps.Marker({map: map, visible: false});
+		marker_destination.setPosition(place.geometry.location);
+  	marker_destination.setVisible();
+
   	map.setCenter(place.geometry.location);
 	});
 
 	var origin_enter = document.getElementById("origin");
 	var destination_enter = document.getElementById("destination");
 
-	origin_enter.addEventListener("keypress", function(event) {
+	origin_enter.addEventListener("keyup", async function(event) {
 		if(event.keyCode === 13)
 			event.preventDefault();
 
-		if (document.getElementsByClassName("pac-container")[0].style.display == "none" && document.getElementsByClassName("pac-container")[1].style.display == "none" && event.keyCode === 13 && marker_destination.getVisible() == true && destination_enter.value != "") {
+		await sleep(300);
+
+		if (document.getElementsByClassName("pac-container")[0].style.display == "none" && document.getElementsByClassName("pac-container")[1].style.display == "none" && event.keyCode === 13 && marker_destination != null && destination_enter.value != "") {
 			Calculate();
 			if(user != "" && liters != null)
 			{
@@ -108,10 +120,13 @@ function initMap() {
 			}
   	}
 	});
-	destination_enter.addEventListener("keypress", function(event) {
+	destination_enter.addEventListener("keyup", async function(event) {
 		if(event.keyCode === 13)
 			event.preventDefault();
-    if (document.getElementsByClassName("pac-container")[0].style.display == "none" && document.getElementsByClassName("pac-container")[1].style.display == "none" && event.keyCode === 13 && marker_origin.getVisible() == true && origin_enter.value != "") {
+
+		await sleep(300);
+
+    if (document.getElementsByClassName("pac-container")[0].style.display == "none" && document.getElementsByClassName("pac-container")[1].style.display == "none" && event.keyCode === 13 && marker_origin != null && origin_enter.value != "") {
 			Calculate();
 			if(user != "" && liters != null)
 			{
