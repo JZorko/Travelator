@@ -3,7 +3,7 @@
 
   if(isset($_POST["username"]) && isset($_POST["name"]) && isset($_POST["origin"]) && isset($_POST["destination"])) {
     $conn = new mysqli("localhost", "root", "", "travelator");
-
+    $conn->set_charset("utf8");
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
       echo json_encode(array("status" => false, "added" => false));
@@ -20,7 +20,7 @@
           $_POST["username"],
           $_POST["origin"],
           $_POST["destination"]);
-              
+
     if ($conn->query($sql) === TRUE) {
       $conn->close();
       echo json_encode(array("status" => true, "added" => true));

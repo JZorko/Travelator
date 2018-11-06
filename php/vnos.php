@@ -3,7 +3,7 @@
 
   if(isset($_POST["name"]) && isset($_POST["consumption"])) {
     $conn = new mysqli("localhost", "root", "", "travelator");
-
+    $conn->set_charset("utf8");
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
       echo json_encode(array("status" => false, "added" => false));
