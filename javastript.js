@@ -368,8 +368,6 @@ function ImportUserCars(){
 			{
 				document.getElementById("avti").options[0] = new Option(data[0].naziv, data[0].poraba, true, false);
 
-				console.log(data);
-
 				for(var i =  1; i < data.length; i++){
 					document.getElementById("avti").options[i] = new Option(data[i].naziv, data[i].poraba, false, false);
 				}
