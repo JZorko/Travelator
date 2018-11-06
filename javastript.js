@@ -415,11 +415,6 @@ function Save(){
 function Locations(){
 	var origin = document.getElementById("origin").value;
 	var destination = document.getElementById("destination").value;
-
-	console.log("Username: " + user);
-	console.log("Origin: " + origin);
-	console.log("Destination: " + destination);
-
 	$.ajax({
     'url': 'php/locations.php',
     'type': 'POST',
@@ -427,26 +422,15 @@ function Locations(){
     'data': {username:user, origin, destination},
     'success': function(data)
 			{
-				if(data.status_origin)
+				if(data.status)
 				{
 					if(data.added)
 					{
-						console.log("Location from origin saved.");
+						console.log("Locations added.");
 					}
 					else
 					{
-						console.log("Location from origin not saved.");
-					}
-				}
-				if(data.status_destination)
-				{
-					if(data.added)
-					{
-						console.log("Location from destination saved.");
-					}
-					else
-					{
-						console.log("Location from destination not saved.");
+						console.log("Locations not added.");
 					}
 				}
 			},
