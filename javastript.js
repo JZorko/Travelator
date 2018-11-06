@@ -292,7 +292,7 @@ function Login(){
 			},
     'beforeSend': function()
 			{
-				console.log("Logging in.")
+				console.log("Logging in...")
 			},
     'error': function(data)
       {
