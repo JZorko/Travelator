@@ -93,56 +93,64 @@
       <p id="title">
         Travelator
       </p>
-      <div>
-        <h4 class="header"> Distance </h4>
+			<div>
+	      <div>
+	        <h4 class="header"> Distance </h4>
+						<ul>
+							<h5 class="header">Origin</h5>
+							<li class="noPadding">
+								<input type="text" placeholder="Enter a location" name="origin" id="origin" required>
+							</li>
+
+							<h5 class="header">Destination</h5>
+							<li class="noPadding">
+								<input type="text" placeholder="Enter a location" name="destination" id="destination" required>
+							</li>
+
+							<li id="btn_cal">Calculate</li>
+
+						</ul>
+				</div>
+
+				<div id="calculation">
+					<h5 class="header">Calculation</h5>
 					<ul>
-						<h5 class="header">Origin</h5>
-						<li class="noPadding">
-							<input type="text" placeholder="Enter a location" name="origin" id="origin" required>
-						</li>
-
-						<h5 class="header">Destination</h5>
-						<li class="noPadding">
-							<input type="text" placeholder="Enter a location" name="destination" id="destination" required>
-						</li>
-
-						<li id="btn_cal">Calculate</li>
-
+						<li id="distance"></li>
+						<li id="liters"></li>
+						<li id="euros"></li>
 					</ul>
+				</div>
+
+				<div class="noLogin">
+	        <h4 class="header">Account</h4>
+	        <ul>
+	          <li id="btn_log">Login</li>
+	          <li id="btn_reg">Register</li>
+	        </ul>
+				</div>
+
+				<div class="login">
+					<h4 class="header">Cars</h4>
+					<ul>
+						<li><select id="avti"></select></li>
+						<li id="btn_vnos">Add a Car</li>
+					</ul>
+				</div>
+
+				<div class="login">
+					<h4 class="header">History</h4>
+					<ul>
+						<li id="btn_history">Open history</li>
+					</ul>
+				</div>
+
+				<div class="login">
+	        <h4 class="header">Account</h4>
+	        <ul>
+	          <li id="btn_logout" onclick="Logout()">Logout</li>
+	        </ul>
+	      </div>
 			</div>
-
-			<div id="calculation">
-				<h5 class="header">Calculation</h5>
-				<ul>
-					<li id="distance"></li>
-					<li id="liters"></li>
-					<li id="euros"></li>
-				</ul>
-			</div>
-
-			<div class="noLogin">
-        <h4 class="header">Account</h4>
-        <ul>
-          <li id="btn_log">Login</li>
-          <li id="btn_reg">Register</li>
-        </ul>
-			</div>
-
-			<div class="login">
-				<h4 class="header">Cars</h4>
-				<ul>
-					<li><select id="avti"></select></li>
-					<li id="btn_vnos">Add a Car</li>
-				</ul>
-			</div>
-
-			<div class="login">
-        <h4 class="header">Account</h4>
-        <ul>
-          <li id="btn_logout" onclick="Logout()">Logout</li>
-        </ul>
-      </div>
-
     </aside>
 		<div id="mapContainer">
 			<div id="map"></div>

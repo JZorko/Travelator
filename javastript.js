@@ -194,6 +194,26 @@ function initMap(){
 			Locations();
 		}
 	}
+	document.getElementById('btn_history').onclick= function () {
+		if(document.getElementById('btn_history').innerHTML == "Open history"){
+			$(document.getElementById('sidebar')).animate({
+	        width:'500px'
+				})
+			$(document.getElementById('mapContainer')).animate({
+	        paddingLeft:'500px'
+				})
+			document.getElementById('btn_history').innerHTML = "Close history";
+		}
+		else {
+			$(document.getElementById('sidebar')).animate({
+	        width:'250px'
+				})
+			$(document.getElementById('mapContainer')).animate({
+	        paddingLeft:'250px'
+				})
+			document.getElementById('btn_history').innerHTML = "Open history";
+		}
+	}
 
 	$('#regForm').submit(function () {
 		Register();

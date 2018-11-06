@@ -11,21 +11,22 @@ body {
   margin: 0;
   padding: 0;
 }
-#sidebar {
-  background-color: var(--sidebarBackground);
-}
 #sidebar #title {
   padding-top: 25px;
   padding-bottom: 25px;
   font-size: 25px;
   text-align: center;
 }
-#sidebar div, .shadedContainer {
+#sidebar div div, .shadedContainer {
   padding: 0;
   border-radius: 3px;
   box-shadow: 0 0 10px var(--shadow);
   margin: 6px;
   background-color: var(--sidebarItemBackground);
+}
+#sidebar div {
+  float: right;
+  width: 238px;
 }
 #sidebar ul {
   padding: 0;
@@ -45,23 +46,23 @@ body {
 #sidebar ul li:active {
   background-color: var(--border);
 }
-#sidebar div .header {
+#sidebar div div .header {
   margin: 0;
   display: block;
   padding: 10px;
   font-weight: bold;
 }
 #sidebar {
-	position: fixed;
+	position: absolute;
 	left: 0;
 	top: 0;
 	bottom: 0;
-  width: 15%;
-  min-width: 250px;
+  width: 250px;
 	height: 100%;
   box-shadow: 0 0 20px var(--shadow);
 	display: inline-block;
   z-index: 2;
+  background-color: var(--sidebarBackground);
 }
 
 .login {
@@ -78,7 +79,7 @@ body {
   position: relative;
 	height: 100%;
 	width: 100%;
-	padding-left: 15%;
+	padding-left: 250px;
 	overflow: hidden;
   z-index: 1;
 }
