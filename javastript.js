@@ -373,10 +373,12 @@ function ImportUserCars(){
 				for(var i =  1; i < data.length; i++){
 					document.getElementById("avti").options[i] = new Option(data[i].naziv, data[i].poraba, false, false);
 				}
+
+				console.log("Cars fetched.");
 			},
     'beforeSend': function()
 			{
-				console.log("Fetching cars...")
+				console.log("Fetching cars...");
 			},
     'error': function(data)
       {
