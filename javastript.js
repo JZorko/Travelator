@@ -376,7 +376,7 @@ function ImportUserCars(){
 			},
     'beforeSend': function()
 			{
-				console.log("Adding car.")
+				console.log("Fetching cars...")
 			},
     'error': function(data)
       {
