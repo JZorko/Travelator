@@ -125,6 +125,7 @@ function initMap(){
   				document.getElementById('calculation').style.display="block";
   				Save();
           Locations();
+          History();
   			}
     	}
     }
@@ -143,6 +144,7 @@ function initMap(){
   				document.getElementById('calculation').style.display="block";
   				Save();
           Locations();
+          History();
   			}
     	}
     }
@@ -207,10 +209,12 @@ function initMap(){
   			document.getElementById('calculation').style.display="block";
   			Save();
   			Locations();
+        History();
   		}
     }
 	}
-	document.getElementById('btn_history').onclick= function () {    
+	document.getElementById('btn_history').onclick= function () {
+    History();
 		if(document.getElementById('btn_history').innerHTML == "Open history"){
 			$(document.getElementById('sidebar')).animate({
 	        left:'0px'
@@ -539,8 +543,7 @@ function History(){
           span.appendChild(document.createTextNode(data[i].zacetna_lokacija + " -> " + data[i].koncna_lokacija));
           li.appendChild(span);
           li.setAttribute("class", "historyEntry");
-          var values = [data[i].id_avtomobila, data[i].zacetna_lokacija, data[i].koncna_lokacija];
-          li.setAttribute("value", values);
+          li.setAttribute("value", data[i].id_avtomobila);
           ul.appendChild(li);
 				}
 
