@@ -7,7 +7,7 @@
       die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = sprintf("SELECT id_avtomobila, zacetna_lokacija, koncna_lokacija FROM Zgodovina WHERE username='%s'", $_POST["username"]);
+    $sql = sprintf("SELECT id_avtomobila, zacetna_lokacija, koncna_lokacija FROM Zgodovina WHERE username='%s' ORDER BY datum_vpogleda DESC", $_POST["username"]);
     $result = $conn->query($sql);
 
     $data = $result->fetch_all(MYSQLI_ASSOC);
