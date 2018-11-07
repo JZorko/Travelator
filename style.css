@@ -11,7 +11,7 @@
   position: absolute;
   white-space: nowrap;
   transform: translateX(0);
-  transition: 1s;
+  transition: 2s;
 }
 #sidebar ul li:hover span {
   transform: translateX(calc(200px - 100%));
@@ -122,7 +122,7 @@ html, body {
     position: relative;
     float: right;
 }
-#btn_log, #btn_reg, #btn_vnos, #btn_logout, #btn_cal {
+#btn_log, #btn_reg, #btn_vnos, #btn_logout, #btn_cal, #btn_history, #history_li {
   cursor: pointer;
 }
 
