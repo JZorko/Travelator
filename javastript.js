@@ -197,24 +197,27 @@ function initMap(){
 	document.getElementById('btn_history').onclick= function () {
 		if(document.getElementById('btn_history').innerHTML == "Open history"){
 			$(document.getElementById('sidebar')).animate({
-	        width:'500px'
+	        left:'0px'
 				})
 			$(document.getElementById('mapContainer')).animate({
 	        paddingLeft:'500px'
 				})
-			document.getElementById('leftDiv').style.display = "block";
+      $(document.getElementById('title')).animate({
+	        paddingLeft:'0px'
+				})
 			document.getElementById('btn_history').innerHTML = "Close history";
 		}
 		else {
 			$(document.getElementById('sidebar')).animate({
-	        width:'250px'
+	        left:'-250px'
 				})
 			$(document.getElementById('mapContainer')).animate({
 	        paddingLeft:'250px'
 				})
-			document.getElementById('leftDiv').style.display = "none";
+      $(document.getElementById('title')).animate({
+	        paddingLeft:'250px'
+				})
 			document.getElementById('btn_history').innerHTML = "Open history";
-
 		}
 	}
 

@@ -98,18 +98,14 @@
 				<div>
 					<h4 class="header">History</h4>
 					<ul>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
+						<li><span>SthSthSthSthSthSthSthSthSthSthSthSthSthSthSthSthSthSthSthSth</span></li>
+						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
+						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
+						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
+						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
+						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
+						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
+						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
 					</ul>
 				</div>
 			</div>

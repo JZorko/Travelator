@@ -7,6 +7,15 @@
 	--cancel: #f44336;
   font-family: 'Open Sans', sans-serif;
 }
+#sidebar ul li span {
+  position: absolute;
+  white-space: nowrap;
+  transform: translateX(0);
+  transition: 1s;
+}
+#sidebar ul li:hover span {
+  transform: translateX(calc(200px - 100%));
+}
 body {
   margin: 0;
   padding: 0;
@@ -14,6 +23,7 @@ body {
 #sidebar #title {
   padding-top: 25px;
   padding-bottom: 25px;
+  padding-left: 250px;
   font-size: 25px;
   text-align: center;
 }
@@ -27,11 +37,13 @@ body {
 #rightDiv {
   float: right;
   width: 250px;
+
 }
 #leftDiv{
   float: left;
   width: 250px;
-  display: none;
+  height: 100vh;
+  overflow-y: scroll;
 }
 #sidebar ul {
   padding: 0;
@@ -41,6 +53,10 @@ body {
   display: block;
   padding: 10px;
   border-bottom: 1px solid var(--border);
+  min-height: 42px;
+  overflow: hidden;
+  position: relative;
+
 }
 #sidebar ul li:last-of-type {
   border-bottom: 0;
@@ -59,10 +75,10 @@ body {
 }
 #sidebar {
 	position: absolute;
-	left: 0;
+	left: -250px;
 	top: 0;
 	bottom: 0;
-  width: 250px;
+  width: 500px;
 	height: 100%;
   box-shadow: 0 0 20px var(--shadow);
 	display: inline-block;
