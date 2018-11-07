@@ -124,8 +124,7 @@ function initMap(){
   			{
   				document.getElementById('calculation').style.display="block";
   				Save();
-          Locations();
-          History();
+          Locations();          
   			}
     	}
     }
@@ -144,7 +143,6 @@ function initMap(){
   				document.getElementById('calculation').style.display="block";
   				Save();
           Locations();
-          History();
   			}
     	}
     }
@@ -209,7 +207,6 @@ function initMap(){
   			document.getElementById('calculation').style.display="block";
   			Save();
   			Locations();
-        History();
   		}
     }
 	}
@@ -255,6 +252,7 @@ function initMap(){
 		Vnos();
 		return false;
 	});
+
 }
 
 function Round(value, decimals) {
@@ -329,6 +327,7 @@ function Login(){
 						user = data.username;
 
 						ImportUserCars();
+            History();
 					}
 					else
 					{
@@ -454,6 +453,7 @@ function Save(){
 					if(data.added)
 					{
 						console.log("Location saved.");
+            History();
 					}
 					else
 					{
@@ -488,6 +488,8 @@ function Locations(){
 					if(data.added_ori)
 					{
 						console.log("Location with origin added.");
+            History();
+
 					}
 					else
 					{
@@ -502,6 +504,8 @@ function Locations(){
 					if(data.added_des)
 					{
 						console.log("Location with destination added.");
+            History();
+
 					}
 					else
 					{
@@ -534,9 +538,7 @@ function History(){
 			{
         /*document.getElementById("avti").getElementsByTagName('option')[data[0].id_avtomobila].selected = 'selected'; !!! selecta pravilni avto*/
         var ul = document.getElementById("history");
-        while( ul.firstChild ){
-          ul.removeChild( ul.firstChild );
-        }
+        ul.innerHTML = "";
 				for(var i =  0; i < data.length; i++){
           var li = document.createElement("li");
           var span = document.createElement("span");
