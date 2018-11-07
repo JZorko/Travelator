@@ -79,27 +79,33 @@ function initMap(){
 	var destination_value;
 	var origin_value;
   google.maps.event.addListener(origin, 'place_changed', function () {
-  	var place = origin.getPlace();
-		origin_value = document.getElementById('origin').value;
+    if(document.getElementById('origin').value != "")
+    {
+      var place = origin.getPlace();
+  		origin_value = document.getElementById('origin').value;
 
-		if(marker_origin == null)
-			marker_origin = new google.maps.Marker({map: map, visible: false});
-  	marker_origin.setPosition(place.geometry.location);
-		marker_origin.setVisible();
+  		if(marker_origin == null)
+  			marker_origin = new google.maps.Marker({map: map, visible: false});
+    	marker_origin.setPosition(place.geometry.location);
+  		marker_origin.setVisible();
 
-  	map.setCenter(place.geometry.location);
+    	map.setCenter(place.geometry.location);
+    }
   });
 
 	google.maps.event.addListener(destination, 'place_changed', function () {
-  	var place = destination.getPlace();
-		destination_value = document.getElementById('destination').value;
+    if(document.getElementById('destination').value != "")
+    {
+      var place = destination.getPlace();
+    	destination_value = document.getElementById('destination').value;
 
-		if(marker_destination == null)
-			marker_destination = new google.maps.Marker({map: map, visible: false});
-		marker_destination.setPosition(place.geometry.location);
-  	marker_destination.setVisible();
+    	if(marker_destination == null)
+    		marker_destination = new google.maps.Marker({map: map, visible: false});
+    	marker_destination.setPosition(place.geometry.location);
+    	marker_destination.setVisible();
 
-  	map.setCenter(place.geometry.location);
+    	map.setCenter(place.geometry.location);
+    }
 	});
 
 	var origin_enter = document.getElementById("origin");
@@ -108,32 +114,39 @@ function initMap(){
 	origin_enter.addEventListener("keyup", async function(event) {
 		if(event.keyCode === 13)
 			event.preventDefault();
+    if(document.getElementById('origin').value != "" && document.getElementById('destination').value != "")
+    {
+  		await sleep(300);
 
-		await sleep(300);
-
-		if (document.getElementsByClassName("pac-container")[0].style.display == "none" && document.getElementsByClassName("pac-container")[1].style.display == "none" && event.keyCode === 13 && marker_destination != null && destination_enter.value != "") {
-			Calculate();
-			if(user != "" && liters != null)
-			{
-				document.getElementById('calculation').style.display="block";
-				Save();
-			}
-  	}
+  		if (document.getElementsByClassName("pac-container")[0].style.display == "none" && document.getElementsByClassName("pac-container")[1].style.display == "none" && event.keyCode === 13 && marker_destination != null && destination_enter.value != "") {
+  			Calculate();
+  			if(user != "" && liters != null)
+  			{
+  				document.getElementById('calculation').style.display="block";
+  				Save();
+          Locations();
+  			}
+    	}
+    }
 	});
 	destination_enter.addEventListener("keyup", async function(event) {
 		if(event.keyCode === 13)
 			event.preventDefault();
+    if(document.getElementById('origin').value != "" && document.getElementById('destination').value != "")
+    {
+  		await sleep(300);
 
-		await sleep(300);
+      if (document.getElementsByClassName("pac-container")[0].style.display == "none" && document.getElementsByClassName("pac-container")[1].style.display == "none" && event.keyCode === 13 && marker_origin != null && origin_enter.value != "") {
+  			Calculate();
+  			if(user != "" && liters != null)
+  			{
+  				document.getElementById('calculation').style.display="block";
+  				Save();
+          Locations();
+  			}
+    	}
+    }
 
-    if (document.getElementsByClassName("pac-container")[0].style.display == "none" && document.getElementsByClassName("pac-container")[1].style.display == "none" && event.keyCode === 13 && marker_origin != null && origin_enter.value != "") {
-			Calculate();
-			if(user != "" && liters != null)
-			{
-				document.getElementById('calculation').style.display="block";
-				Save();
-			}
-  	}
 	});
   if (navigator.geolocation) {
     	navigator.geolocation.getCurrentPosition(
@@ -186,17 +199,21 @@ function initMap(){
 		modal_reg.style.display = "none";
 	}
 	document.getElementById('btn_cal').onclick= function () {
-		Calculate();
-		if(user != "" && liters != null)
-		{
-			document.getElementById('calculation').style.display="block";
-			Save();
-			Locations();
-		}
+    if(document.getElementById('origin').innerHTML != "" && document.getElementById('destination').innerHTML != "")
+    {
+      Calculate();
+  		if(user != "" && liters != null)
+  		{
+  			document.getElementById('calculation').style.display="block";
+  			Save();
+  			Locations();
+  		}
+    }
 	}
 	document.getElementById('btn_history').onclick= function () {
 		if(document.getElementById('btn_history').innerHTML == "Open history"){
-			$(document.getElementById('sidebar')).animate({
+      History();
+      $(document.getElementById('sidebar')).animate({
 	        width:'500px'
 				})
 			$(document.getElementById('mapContainer')).animate({
@@ -214,7 +231,10 @@ function initMap(){
 				})
 			document.getElementById('leftDiv').style.display = "none";
 			document.getElementById('btn_history').innerHTML = "Open history";
-
+      var ul = document.getElementById("history");
+      while( ul.firstChild ){
+        ul.removeChild(ul.firstChild);
+      }
 		}
 	}
 
@@ -460,21 +480,72 @@ function Locations(){
     'data': {username:user, origin, destination},
     'success': function(data)
 			{
-				if(data.status)
+				if(data.status_ori)
 				{
-					if(data.added)
+					if(data.added_ori)
 					{
-						console.log("Locations added.");
+						console.log("Location with origin added.");
 					}
 					else
 					{
-						console.log("Locations not added.");
+						console.log("Locations with origin not added.");
 					}
 				}
+        else {
+          console.log("First location already exist in database.");
+        }
+        if(data.status_des)
+				{
+					if(data.added_des)
+					{
+						console.log("Location with destination added.");
+					}
+					else
+					{
+						console.log("Locations with destination not added.");
+					}
+				}
+        else {
+          console.log("Second location already exist in database.");
+        }
 			},
     'beforeSend': function()
 			{
 				console.log("Adding locations.");
+			},
+    'error': function(data)
+      {
+      // this is what happens if the request fails.
+      	console.log(data);
+    	}
+	});
+}
+
+function History(){
+	$.ajax({
+    'url': 'php/history.php',
+    'type': 'POST',
+    'dataType': 'json',
+    'data': {username: user},
+    'success': function(data)
+			{
+        /*document.getElementById("avti").getElementsByTagName('option')[data[0].id_avtomobila].selected = 'selected'; !!! selecta pravilni avto*/
+
+				for(var i =  0; i < data.length; i++){
+          var ul = document.getElementById("history");
+          var li = document.createElement("li");
+          li.appendChild(document.createTextNode(data[i].zacetna_lokacija + " -> " + data[i].koncna_lokacija));
+          li.setAttribute("id", "history_li");
+          var values = [data[i].id_avtomobila, data[i].zacetna_lokacija, data[i].koncna_lokacija];
+          li.setAttribute("value", values);
+          ul.appendChild(li);
+				}
+
+				console.log("History fetched.");
+			},
+    'beforeSend': function()
+			{
+				console.log("Fetching history...");
 			},
     'error': function(data)
       {

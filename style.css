@@ -106,7 +106,7 @@ html, body {
     position: relative;
     float: right;
 }
-#btn_log, #btn_reg, #btn_vnos, #btn_logout, #btn_cal, #btn_history {
+#btn_log, #btn_reg, #btn_vnos, #btn_logout, #btn_cal, #btn_history, #history_li {
   cursor: pointer;
 }
 

@@ -97,40 +97,26 @@
 			<div id="leftDiv">
 				<div>
 					<h4 class="header">History</h4>
-					<ul>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-						<li>Sth</li>
-					</ul>
+					<ul id="history"></ul>
 				</div>
 			</div>
 
 			<div id="rightDiv">
 	      <div>
 	        <h4 class="header"> Distance </h4>
-						<ul>
-							<h5 class="header">Origin</h5>
-							<li class="noPadding">
-								<input type="text" placeholder="Enter a location" name="origin" id="origin" required>
-							</li>
+					<ul>
+						<h5 class="header">Origin</h5>
+						<li class="noPadding">
+							<input type="text" placeholder="Enter a location" name="origin" id="origin" required>
+						</li>
 
-							<h5 class="header">Destination</h5>
-							<li class="noPadding">
-								<input type="text" placeholder="Enter a location" name="destination" id="destination" required>
-							</li>
+						<h5 class="header">Destination</h5>
+						<li class="noPadding">
+							<input type="text" placeholder="Enter a location" name="destination" id="destination" required>
+						</li>
 
-							<li id="btn_cal">Calculate</li>
-
-						</ul>
+						<li id="btn_cal">Calculate</li>
+					</ul>	
 				</div>
 
 				<div id="calculation">
