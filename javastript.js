@@ -210,7 +210,7 @@ function initMap(){
   		}
     }
 	}
-	document.getElementById('btn_history').onclick= function () {
+	document.getElementById('btn_history').onclick= function () {    
 		if(document.getElementById('btn_history').innerHTML == "Open history"){
 			$(document.getElementById('sidebar')).animate({
 	        left:'0px'
@@ -529,12 +529,16 @@ function History(){
     'success': function(data)
 			{
         /*document.getElementById("avti").getElementsByTagName('option')[data[0].id_avtomobila].selected = 'selected'; !!! selecta pravilni avto*/
-
+        var ul = document.getElementById("history");
+        while( ul.firstChild ){
+          ul.removeChild( ul.firstChild );
+        }
 				for(var i =  0; i < data.length; i++){
-          var ul = document.getElementById("history");
           var li = document.createElement("li");
-          li.appendChild(document.createTextNode(data[i].zacetna_lokacija + " -> " + data[i].koncna_lokacija));
-          li.setAttribute("id", "history_li");
+          var span = document.createElement("span");
+          span.appendChild(document.createTextNode(data[i].zacetna_lokacija + " -> " + data[i].koncna_lokacija));
+          li.appendChild(span);
+          li.setAttribute("class", "historyEntry");
           var values = [data[i].id_avtomobila, data[i].zacetna_lokacija, data[i].koncna_lokacija];
           li.setAttribute("value", values);
           ul.appendChild(li);

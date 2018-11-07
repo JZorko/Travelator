@@ -97,16 +97,7 @@
 			<div id="leftDiv">
 				<div>
 					<h4 class="header">History</h4>
-					<ul id="history">
-						<li><span>SthSthSthSthSthSthSthSthSthSthSthSthSthSthSthSthSthSthSthSth</span></li>
-						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
-						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
-						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
-						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
-						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
-						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
-						<li><span>SthSthSthSthSthSthSthSthSthSth</span></li>
-					</ul>
+					<ul id="history"></ul>
 				</div>
 			</div>
 
