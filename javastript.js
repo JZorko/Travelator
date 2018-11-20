@@ -555,7 +555,7 @@ function History(){
 				for(var i =  0; i < data.length; i++){
           var li = document.createElement("li");
           var span = document.createElement("span");
-          span.appendChild(document.createTextNode(data[i].zacetna_lokacija + " -> " + data[i].koncna_lokacija));
+          span.appendChild(document.createTextNode((data[i].zacetna_lokacija).replace(", Slovenia", "") + " -> " + (data[i].koncna_lokacija).replace(", Slovenia", "")));
           span.setAttribute("class", "historySpan");
           li.appendChild(span);
           li.setAttribute("class", "historyEntry");
