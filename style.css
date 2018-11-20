@@ -38,11 +38,12 @@ body {
   float: right;
   width: 250px;
   overflow-y: scroll;
+  height: 100%;
 }
 #leftDiv{
   float: left;
   width: 250px;
-  height: 100vh;
+  height: 100%;
   overflow-y: scroll;
 }
 #sidebar ul {
