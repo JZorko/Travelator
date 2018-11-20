@@ -205,6 +205,8 @@ function initMap(){
 		if(confirm("Are you sure?"))
     {
       var car_index = document.getElementById("avti").selectedIndex;
+      console.log(document.getElementById("avti").options[document.getElementById("avti").selectedIndex].text);
+      console.log(car_index);      
     }
 	}
 	document.getElementById('btn_cal').onclick= function () {
@@ -279,7 +281,7 @@ function ReadHistory(naziv, zacetna_lokacija, koncna_lokacija){
       document.getElementById("avti").selectedIndex = i;
     }
   };
-  document.getElementById('btn_cal').click();
+  document.getElementById('btn_cal').click(); //potrebno dopovedati textboxema, da mora besedilo vzeti kot autocomplete... da bosta markerja delala
 }
 
 function Register(){
@@ -287,7 +289,7 @@ function Register(){
 	var password = document.getElementById("regPsw").value;
 
 	$.ajax({
-    'url': 'php/register.php',
+    'url': './php/register.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: username, password: password},

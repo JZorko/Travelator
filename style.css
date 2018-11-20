@@ -122,7 +122,7 @@ html, body {
     position: relative;
     float: right;
 }
-#btn_log, #btn_reg, #btn_vnos, #btn_logout, #btn_cal, #btn_history, .historyEntry span {
+#btn_log, #btn_reg, #btn_vnos, #btn_del_car, #btn_logout, #btn_cal, #btn_history, .historyEntry span {
   cursor: pointer;
 }
 
