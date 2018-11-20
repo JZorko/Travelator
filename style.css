@@ -37,7 +37,7 @@ body {
 #rightDiv {
   float: right;
   width: 250px;
-
+  overflow-y: scroll;
 }
 #leftDiv{
   float: left;
