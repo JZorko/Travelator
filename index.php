@@ -141,7 +141,7 @@
 					<ul>
 						<li><select id="avti"></select></li>
 						<li id="btn_vnos">Add a Car</li>
-						<li id="">Remove a Car</li>
+						<li id="btn_del_car">Remove a Car</li>
 					</ul>
 				</div>
 
