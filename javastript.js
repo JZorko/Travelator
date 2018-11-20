@@ -73,6 +73,9 @@ function initMap(){
 				}
 			}
 		}
+    else {
+      console.log("Calculate: Both markers are null");
+    }
 	}
 
 
@@ -147,20 +150,7 @@ function initMap(){
     	}
     }
 	});
-  /*var historyEntries = document.getElementsByClassName("historyEntry");
-  var historySpans = document.getElementsByClassName("historySpan");
-  if (historyEntries.length > 0)
-  {
-    for (var j = 0; j < historyEntries.length; j++) {
-      var id_avto = historyEntries[j].value;
-      var span_content = historySpans[j].innerText;
-      var origin_content = span_content.substring(0,span_content.indexOf(" -> "));
-      var destination_content = span_content.replace(origin_content + " -> ", "");
-      historyEntries[j].addEventListener("click", function(event) {
-        alert(id_avto + "|" + origin_content + "|" + destination_content );
-      });
-    }
-  }*/
+
   if (navigator.geolocation) {
     	navigator.geolocation.getCurrentPosition(
     		function(position) {
@@ -211,8 +201,14 @@ function initMap(){
 		modal_log.style.display = "none";
 		modal_reg.style.display = "none";
 	}
+  document.getElementById('btn_del_car').onclick= function () {
+		if(confirm("Are you sure?"))
+    {
+      var car_index = document.getElementById("avti").selectedIndex;
+    }
+	}
 	document.getElementById('btn_cal').onclick= function () {
-    if(document.getElementById('origin').innerHTML != "" && document.getElementById('destination').innerHTML != "")
+    if(document.getElementById('origin').value != "" && document.getElementById('destination').value != "")
     {
       Calculate();
   		if(user != "" && liters != null)
@@ -221,6 +217,9 @@ function initMap(){
   			Save();
   			Locations();
   		}
+    }
+    else {
+      console.log("Value of markers not defined.");
     }
 	}
 	document.getElementById('btn_history').onclick= function () {
@@ -265,11 +264,22 @@ function initMap(){
 		Vnos();
 		return false;
 	});
-
 }
 
 function Round(value, decimals) {
 	return Number(Math.round(value+'e'+decimals)+'e-'+decimals);
+}
+
+function ReadHistory(naziv, zacetna_lokacija, koncna_lokacija){
+  document.getElementById("origin").value = zacetna_lokacija;
+  document.getElementById("destination").value = koncna_lokacija;
+  for(var i =  0; i < document.getElementById("avti").options.length; i++){
+    if (document.getElementById("avti").options[i].text == naziv)
+    {
+      document.getElementById("avti").selectedIndex = i;
+    }
+  };
+  document.getElementById('btn_cal').click();
 }
 
 function Register(){
@@ -444,6 +454,34 @@ function ImportUserCars(){
 	});
 }
 
+function DeleteUserCars(){
+	$.ajax({
+    'url': './php/izbrisAvta.php',
+    'type': 'POST',
+    'dataType': 'json',
+    'data': {username: user},
+    'success': function(data)
+			{
+				document.getElementById("avti").options[0] = new Option(data[0].naziv, data[0].poraba, true, false);
+
+				for(var i =  1; i < data.length; i++){
+					document.getElementById("avti").options[i] = new Option(data[i].naziv, data[i].poraba, false, false);
+				}
+
+				console.log("Cars fetched.");
+			},
+    'beforeSend': function()
+			{
+				console.log("Fetching cars...");
+			},
+    'error': function(data)
+      {
+      // this is what happens if the request fails.
+      	console.log(data);
+    	}
+	});
+}
+
 function Save(){
 	var name = document.getElementById("avti").options[document.getElementById("avti").selectedIndex].text;
 	var origin = document.getElementById("origin").value;
@@ -559,7 +597,7 @@ function History(){
           span.setAttribute("class", "historySpan");
           li.appendChild(span);
           li.setAttribute("class", "historyEntry");
-          li.setAttribute("value", data[i].id_avtomobila);
+          li.setAttribute("onclick", "ReadHistory('" + data[i].naziv + "','" + data[i].zacetna_lokacija + "','" +data[i].koncna_lokacija + "');");
           ul.appendChild(li);
 				}
 
