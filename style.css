@@ -84,10 +84,8 @@ body {
 	display: inline-block;
   z-index: 2;
   background-color: var(--sidebarBackground);
-  overflow-x: hidden;
-  overflow-y: scroll;
+  overflow: hidden;
   box-sizing: content-box;
-
 }
 
 ::-webkit-scrollbar {
