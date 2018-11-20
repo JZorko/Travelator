@@ -2,7 +2,7 @@
   session_start();
 
   if(isset($_POST["username"]) && isset($_POST["origin"]) && isset($_POST["destination"])) {
-    $conn = new mysqli("localhost", "root", "", "travelator");
+    $conn = new mysqli("localhost", "user", "user", "travelator");
     $conn->set_charset("utf8");
     if ($conn->connect_error) {
       die("Connection failed: " . $conn->connect_error);
