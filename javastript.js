@@ -204,9 +204,7 @@ function initMap(){
   document.getElementById('btn_del_car').onclick= function () {
 		if(confirm("Are you sure?"))
     {
-      var car_index = document.getElementById("avti").selectedIndex;
-      console.log(document.getElementById("avti").options[document.getElementById("avti").selectedIndex].text);
-      console.log(car_index);      
+      DeleteUserCars();
     }
 	}
 	document.getElementById('btn_cal').onclick= function () {
@@ -396,7 +394,7 @@ function Vnos(){
 	console.log("Consumption: " + consumption);
 
 	$.ajax({
-    'url': './php/vnos.php',
+    'url': './php/addCar.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: user, name: name, consumption: consumption},
@@ -430,7 +428,7 @@ function Vnos(){
 
 function ImportUserCars(){
 	$.ajax({
-    'url': './php/avti.php',
+    'url': './php/importCar.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: user},
@@ -457,24 +455,31 @@ function ImportUserCars(){
 }
 
 function DeleteUserCars(){
+  var name = document.getElementById("avti").options[document.getElementById("avti").selectedIndex].text;
+
 	$.ajax({
-    'url': './php/izbrisAvta.php',
+    'url': './php/deleteCar.php',
     'type': 'POST',
     'dataType': 'json',
-    'data': {username: user},
+    'data': {username: user, name},
     'success': function(data)
 			{
-				document.getElementById("avti").options[0] = new Option(data[0].naziv, data[0].poraba, true, false);
-
-				for(var i =  1; i < data.length; i++){
-					document.getElementById("avti").options[i] = new Option(data[i].naziv, data[i].poraba, false, false);
+				if(data.status)
+				{
+					if(data.deleted)
+					{
+						console.log("Car deleted.");
+            ImportUserCars();         
+					}
+					else
+					{
+						console.log("Car not deleted.");
+					}
 				}
-
-				console.log("Cars fetched.");
 			},
     'beforeSend': function()
 			{
-				console.log("Fetching cars...");
+				console.log("Deleting car...");
 			},
     'error': function(data)
       {
