@@ -314,7 +314,7 @@ function Login(){
 	var password = document.getElementById("logPsw").value;
 
 	$.ajax({
-    'url': 'php/login.php',
+    'url': './php/login.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: username, password: password},
@@ -384,7 +384,7 @@ function Vnos(){
 	console.log("Consumption: " + consumption);
 
 	$.ajax({
-    'url': 'php/vnos.php',
+    'url': './php/vnos.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: user, name: name, consumption: consumption},
@@ -418,7 +418,7 @@ function Vnos(){
 
 function ImportUserCars(){
 	$.ajax({
-    'url': 'php/avti.php',
+    'url': './php/avti.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: user},
@@ -455,7 +455,7 @@ function Save(){
 	console.log("Destination: " + destination);
 
 	$.ajax({
-    'url': 'php/save.php',
+    'url': './php/save.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username:user, name, origin, destination},
@@ -490,7 +490,7 @@ function Locations(){
 	var origin = document.getElementById("origin").value;
 	var destination = document.getElementById("destination").value;
 	$.ajax({
-    'url': 'php/locations.php',
+    'url': './php/locations.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username:user, origin, destination},
@@ -543,7 +543,7 @@ function Locations(){
 
 function History(){
 	$.ajax({
-    'url': 'php/history.php',
+    'url': './php/history.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: user},
