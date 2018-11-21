@@ -8,8 +8,7 @@
       die("Connection failed: " . $conn->connect_error);
       echo json_encode(array("status" => false, "deleted" => false));
     }
-    $sql = sprintf("DELETE FROM Avtomobili WHERE username='%s' AND naziv='%s'", $_POST["username"], $_POST["name"]); // need fix - foreign key problems
-    echo $sql;
+    $sql = sprintf("DELETE FROM Avtomobili WHERE username='%s' AND naziv='%s'", $_POST["username"], $_POST["name"]);
 
     if ($conn->query($sql) === TRUE) {
       $conn->close();

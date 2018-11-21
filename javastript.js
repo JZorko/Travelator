@@ -468,8 +468,9 @@ function DeleteUserCars(){
 				{
 					if(data.deleted)
 					{
-						console.log("Car deleted.");
-            ImportUserCars();         
+						console.log("Car deleted."); //mora se osvežiti !!! - ne izbriše vizualno avta in zgodovine!
+            ImportUserCars();
+            History();
 					}
 					else
 					{
