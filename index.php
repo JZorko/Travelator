@@ -89,6 +89,23 @@
 		</div>
 	</div>
 
+	<div id="manage">
+		<div id="manageForm" class="modal">
+		  <form id="manForm" class="modal-content" method="post">
+		    <div class="container">
+		    	<h1>Manage accounts</h1>
+		    	<p>Here you can delete accounts.</p>
+					<hr>
+					<ul id="manage_accounts"></ul>					
+		    </div>
+		    <div class="container" style="background-color:#f1f1f1">
+		      <button type="button" onclick="document.getElementById('manageForm').style.display='none'"
+					class="cancelbtn">Cancel</button>
+		    </div>
+		  </form>
+		</div>
+	</div>
+
 		<aside id="sidebar">
       <p id="title">
         Travelator
@@ -155,6 +172,7 @@
 				<div class="login">
 	        <h4 class="header">Account</h4>
 	        <ul>
+						<li id="btn_manage_accounts">Manage account</li>
 	          <li id="btn_logout" onclick="Logout()">Logout</li>
 	        </ul>
 	      </div>

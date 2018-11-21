@@ -96,7 +96,6 @@ body {
   display: none;
 }
 
-
 #map {
 	position: relative;
     height: 100%;
@@ -120,7 +119,7 @@ html, body {
     position: relative;
     float: right;
 }
-#btn_log, #btn_reg, #btn_vnos, #btn_del_car, #btn_logout, #btn_cal, #btn_history, .historyEntry span {
+#btn_log, #btn_reg, #btn_vnos, #btn_del_car, #btn_logout, #btn_manage_accounts, #btn_cal, #btn_history, .historyEntry span {
   cursor: pointer;
 }
 

@@ -180,6 +180,7 @@ function initMap(){
   var modal_reg = document.getElementById('registerForm');
 	var modal_log = document.getElementById('loginForm');
 	var modal_vno = document.getElementById('vnosForm');
+  var modal_man = document.getElementById('manageForm');
 	// When the user clicks anywhere outside of the modal, close it
 	window.onclick = function(event) {
 	    if (event.target == modal_reg) {
@@ -191,28 +192,38 @@ function initMap(){
 			else if (event.target == modal_vno) {
 	        modal_vno.style.display = "none";
 	    }
+      else if (event.target == modal_man) {
+	        modal_man.style.display = "none";
+	    }
 	}
 
 	document.getElementById('btn_reg').onclick= function () {
 		document.getElementById('registerForm').style.display="block";
 		modal_log.style.display = "none";
 		modal_vno.style.display = "none";
+    modal_man.style.display = "none";
 	}
 	document.getElementById('btn_log').onclick= function () {
 		document.getElementById('loginForm').style.display="block";
 		modal_reg.style.display = "none";
 		modal_vno.style.display = "none";
+    modal_man.style.display = "none";
 	}
 	document.getElementById('btn_vnos').onclick= function () {
 		document.getElementById('vnosForm').style.display="block";
 		modal_log.style.display = "none";
 		modal_reg.style.display = "none";
+    modal_man.style.display = "none";
+	}
+  document.getElementById('btn_manage_accounts').onclick= function () {
+		document.getElementById('manageForm').style.display="block";
+		modal_log.style.display = "none";
+		modal_reg.style.display = "none";
+    modal_vno.style.display = "none";
+    AccountList();
 	}
   document.getElementById('btn_del_car').onclick= function () {
-		if(confirm("Are you sure?"))
-    {
-      DeleteUserCars();
-    }
+    DeleteUserCars();
 	}
 	document.getElementById('btn_cal').onclick= function () {
     if(document.getElementById('origin').value != "" && document.getElementById('destination').value != "" && cars.options[cars.selectedIndex] != undefined)
@@ -385,6 +396,10 @@ function Login(username, password){
 						user = data.username;
             admin = data.admin;
 
+            if (admin == 1) {
+              document.getElementById('btn_manage_accounts').style.display = "block";
+  					}
+
 						ImportUserCars();
             ImportHistory();
 					}
@@ -406,9 +421,86 @@ function Login(username, password){
 	});
 }
 
+function AccountList(){
+  $.ajax({
+    'url': './php/accountList.php',
+    'type': 'POST',
+    'dataType': 'json',
+    'data': {username: user, admin},
+    'success': function(data)
+			{
+        /*document.getElementById("avti").getElementsByTagName('option')[data[0].id_avtomobila].selected = 'selected'; !!! selecta pravilni avto*/
+        var ul = document.getElementById("manage_accounts");
+        ul.innerHTML = "";
+				for(var i =  0; i < data.length; i++){
+          var li = document.createElement("li");
+          var span = document.createElement("span");
+          span.appendChild(document.createTextNode(data[i].username));
+          span.setAttribute("class", "manageSpan");
+          li.appendChild(span);
+          li.setAttribute("class", "manageEntry");
+          li.setAttribute("onclick", "DeleteAccount('" + data[i].username+ "');");
+          ul.appendChild(li);
+				}
+
+				console.log("AccountList fetched.");
+			},
+    'beforeSend': function()
+			{
+				console.log("Fetching AccountList...");
+			},
+    'error': function(data)
+      {
+      // this is what happens if the request fails.
+      	console.log(data);
+    	}
+	});
+}
+
+function DeleteAccount(username){
+  if (confirm("Are you sure?")) {
+    var admin_user = user;
+    $.ajax({
+      'url': './php/deleteAcc.php',
+      'type': 'POST',
+      'dataType': 'json',
+      'data': {delitingAcc: username},
+      'success': function(data)
+  			{
+  				if(data.status)
+  				{
+  					if(data.deleted)
+  					{
+  						console.log("Account deleted.");
+              if (username == admin_user) {
+                document.getElementById('manageForm').style.display="none";
+                Logout();
+              }
+              AccountList();
+  					}
+  					else
+  					{
+  						console.log("Account not deleted.");
+  					}
+  				}
+  			},
+      'beforeSend': function()
+  			{
+  				console.log("Deleting account...");
+  			},
+      'error': function(data)
+        {
+        // this is what happens if the request fails.
+        	console.log(data);
+      	}
+  	});
+  }
+}
+
 function Logout(){
 	console.log("User logged out.");
 	document.getElementById('calculation').style.display="none";
+  document.getElementById('btn_manage_accounts').style.display="none";
 	var loginElements = document.getElementsByClassName("login");
 	var i;
 	for(i = 0; i < loginElements.length; i++){
@@ -503,39 +595,42 @@ function ImportUserCars(){
 }
 
 function DeleteUserCars(){
-  var name = document.getElementById("avti").options[document.getElementById("avti").selectedIndex].text;
+  if(confirm("Are you sure?"))
+  {
+    var name = document.getElementById("avti").options[document.getElementById("avti").selectedIndex].text;
 
-	$.ajax({
-    'url': './php/deleteCar.php',
-    'type': 'POST',
-    'dataType': 'json',
-    'data': {username: user, name},
-    'success': function(data)
-			{
-				if(data.status)
-				{
-					if(data.deleted)
-					{
-						console.log("Car deleted."); //mora se osvežiti !!! - ne izbriše vizualno avta in zgodovine!
-            ImportUserCars();
-            ImportHistory();
-					}
-					else
-					{
-						console.log("Car not deleted.");
-					}
-				}
-			},
-    'beforeSend': function()
-			{
-				console.log("Deleting car...");
-			},
-    'error': function(data)
-      {
-      // this is what happens if the request fails.
-      	console.log(data);
-    	}
-	});
+  	$.ajax({
+      'url': './php/deleteCar.php',
+      'type': 'POST',
+      'dataType': 'json',
+      'data': {username: user, name},
+      'success': function(data)
+  			{
+  				if(data.status)
+  				{
+  					if(data.deleted)
+  					{
+  						console.log("Car deleted."); //mora se osvežiti !!! - ne izbriše vizualno avta in zgodovine!
+              ImportUserCars();
+              ImportHistory();
+  					}
+  					else
+  					{
+  						console.log("Car not deleted.");
+  					}
+  				}
+  			},
+      'beforeSend': function()
+  			{
+  				console.log("Deleting car...");
+  			},
+      'error': function(data)
+        {
+        // this is what happens if the request fails.
+        	console.log(data);
+      	}
+  	});
+  }
 }
 
 function History(){
