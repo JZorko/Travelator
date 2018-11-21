@@ -465,6 +465,8 @@ function Add_Update(){
 }
 
 function ImportUserCars(){
+  document.getElementById("avti").innerHTML = "";
+
 	$.ajax({
     'url': './php/importCar.php',
     'type': 'POST',
