@@ -1,4 +1,5 @@
 var user = "";
+var admin = false;
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
@@ -382,6 +383,7 @@ function Login(username, password){
 						document.getElementById('loginForm').style.display = "none";
 
 						user = data.username;
+            admin = data.admin;
 
 						ImportUserCars();
             ImportHistory();

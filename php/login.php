@@ -8,7 +8,7 @@
       die("Connection failed: " . $conn->connect_error);
     }
 
-    $sql = sprintf("SELECT username, password FROM Uporabniki WHERE username='%s'", $_POST["username"]);
+    $sql = sprintf("SELECT username, password, admin FROM Uporabniki WHERE username='%s'", $_POST["username"]);
 
     $result = $conn->query($sql);
 
@@ -18,7 +18,7 @@
 
     if(!is_null($data)){
       if(password_verify($_POST["password"], $data["password"]) && $_POST["username"] == $data["username"]) {
-        echo json_encode(array("status" => true, "accepted" => true, "username" => $_POST["username"]));
+        echo json_encode(array("status" => true, "accepted" => true, "username" => $_POST["username"], "admin" => $data["admin"]));
       }
       else {
         echo json_encode(array("status" => true, "accepted" => false));
