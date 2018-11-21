@@ -8,8 +8,8 @@
     }
 
     $sql = sprintf(
-       "INSERT INTO Uporabniki (username, password)
-        VALUES ('%s', '%s')",
+       "INSERT INTO Uporabniki (username, password, admin)
+        VALUES ('%s', '%s', 0)",
           $_POST["username"],
           password_hash($_POST["password"], PASSWORD_DEFAULT));
 

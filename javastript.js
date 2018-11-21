@@ -126,10 +126,13 @@ function initMap(){
   			if(user != "" && liters != null)
   			{
   				document.getElementById('calculation').style.display="block";
-  				Save();
-          Locations();
+          Path();
+          History();
   			}
     	}
+    }
+    else {
+      console.log("Value of markers not defined or car is not selected.");
     }
 	});
 	destination_enter.addEventListener("keyup", async function(event) {
@@ -144,10 +147,13 @@ function initMap(){
   			if(user != "" && liters != null)
   			{
   				document.getElementById('calculation').style.display="block";
-  				Save();
-          Locations();
+          Path();
+          History();
   			}
     	}
+    }
+    else {
+      console.log("Value of markers not defined or car is not selected.");
     }
 	});
 
@@ -214,16 +220,16 @@ function initMap(){
   		if(user != "" && liters != null)
   		{
   			document.getElementById('calculation').style.display="block";
-  			Save();
-  			Locations();
+  			Path();
+        History();
   		}
     }
     else {
-      console.log("Value of markers not defined.");
+      console.log("Value of markers not defined or car is not selected.");
     }
 	}
 	document.getElementById('btn_history').onclick= function () {
-    History();
+    ImportHistory();
 		if(document.getElementById('btn_history').innerHTML == "Open history"){
 			$(document.getElementById('sidebar')).animate({
 	        left:'0px'
@@ -350,7 +356,7 @@ function Login(){
 						user = data.username;
 
 						ImportUserCars();
-            History();
+            ImportHistory();
 					}
 					else
 					{
@@ -402,23 +408,19 @@ function Add_Update(){
 			{
 				if(data.status)
 				{
-					if(data.added)
+					if(data.added == true && data.updated == false)
 					{
 						console.log("Car added.");
 						document.getElementById('vnosForm').style.display = "none";
 						ImportUserCars();
 					}
-					else
+					else if(data.added == false && data.updated == true)
 					{
-						console.log("Car not added.");
-					}
-          if (data.updated) {
             console.log("Car updated.");
 						document.getElementById('vnosForm').style.display = "none";
-						ImportUserCars();
-          }
+					}
           else {
-            console.log("Car not updated.");
+            console.log("Something went wrong.");
           }
 				}
 			},
@@ -484,7 +486,7 @@ function DeleteUserCars(){
 					{
 						console.log("Car deleted."); //mora se osvežiti !!! - ne izbriše vizualno avta in zgodovine!
             ImportUserCars();
-            History();
+            ImportHistory();
 					}
 					else
 					{
@@ -504,7 +506,7 @@ function DeleteUserCars(){
 	});
 }
 
-function Save(){
+function History(){
 	var name = document.getElementById("avti").options[document.getElementById("avti").selectedIndex].text;
 	var origin = document.getElementById("origin").value;
 	var destination = document.getElementById("destination").value;
@@ -515,7 +517,7 @@ function Save(){
 	console.log("Destination: " + destination);
 
 	$.ajax({
-    'url': './php/save.php',
+    'url': './php/history.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username:user, name, origin, destination},
@@ -525,18 +527,18 @@ function Save(){
 				{
 					if(data.added)
 					{
-						console.log("Location saved.");
-            History();
+						console.log("History added.");
+            ImportHistory();
 					}
 					else
 					{
-						console.log("Location not saved.");
+						console.log("History not added.");
 					}
 				}
 			},
     'beforeSend': function()
 			{
-				console.log("Saving location.");
+				console.log("Adding history.");
 			},
     'error': function(data)
       {
@@ -546,52 +548,39 @@ function Save(){
 	});
 }
 
-function Locations(){
+function Path(){
 	var origin = document.getElementById("origin").value;
 	var destination = document.getElementById("destination").value;
 	$.ajax({
-    'url': './php/locations.php',
+    'url': './php/path.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username:user, origin, destination},
     'success': function(data)
 			{
-				if(data.status_ori)
+				if(data.pot_added)
 				{
-					if(data.added_ori)
-					{
-						console.log("Location with origin added.");
-            History();
-
-					}
-					else
-					{
-						console.log("Locations with origin not added.");
-					}
-				}
-        else {
-          console.log("First location already exist in database.");
+          console.log("Path was added.");
         }
-        if(data.status_des)
-				{
-					if(data.added_des)
-					{
-						console.log("Location with destination added.");
-            History();
-
-					}
-					else
-					{
-						console.log("Locations with destination not added.");
-					}
-				}
         else {
-          console.log("Second location already exist in database.");
+          console.log("Path was not added.");
+        }
+        if (data.status_ori) {
+          console.log("Origin: TRUE");
+        }
+        else {
+          console.log("Origin: FALSE");
+        }
+        if (data.status_des) {
+          console.log("Destination: TRUE");
+        }
+        else {
+          console.log("Destination: FALSE");
         }
 			},
     'beforeSend': function()
 			{
-				console.log("Adding locations.");
+				console.log("Adding path.");
 			},
     'error': function(data)
       {
@@ -601,9 +590,9 @@ function Locations(){
 	});
 }
 
-function History(){
+function ImportHistory(){
 	$.ajax({
-    'url': './php/history.php',
+    'url': './php/importHistory.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: user},
@@ -615,7 +604,7 @@ function History(){
 				for(var i =  0; i < data.length; i++){
           var li = document.createElement("li");
           var span = document.createElement("span");
-          span.appendChild(document.createTextNode((data[i].zacetna_lokacija).replace(", Slovenia", "") + " -> " + (data[i].koncna_lokacija).replace(", Slovenia", "")));
+          span.appendChild(document.createTextNode(data[i].naziv + ":   " +  (data[i].zacetna_lokacija).replace(", Slovenia", "") + " -> " + (data[i].koncna_lokacija).replace(", Slovenia", "")));
           span.setAttribute("class", "historySpan");
           li.appendChild(span);
           li.setAttribute("class", "historyEntry");
