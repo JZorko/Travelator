@@ -10,6 +10,7 @@ function initMap(){
 		disableDefaultUI: true,
 		zoomControl: true,
 	}
+  var geocoder = new google.maps.Geocoder();
 	var directionService = new google.maps.DirectionsService;
 	var directionDisplay = new google.maps.DirectionsRenderer;
 	var map = new google.maps.Map(document.getElementById('map'), options);
@@ -94,7 +95,6 @@ function initMap(){
     	map.setCenter(place.geometry.location);
     }
   });
-
 	google.maps.event.addListener(destination, 'place_changed', function () {
     if(document.getElementById('destination').value != "")
     {
@@ -277,6 +277,7 @@ function Round(value, decimals) {
 }
 
 function ReadHistory(naziv, zacetna_lokacija, koncna_lokacija){
+  console.log(zacetna_lokacija);
   document.getElementById("origin").value = zacetna_lokacija;
   document.getElementById("destination").value = koncna_lokacija;
   for(var i =  0; i < document.getElementById("avti").options.length; i++){
@@ -285,9 +286,35 @@ function ReadHistory(naziv, zacetna_lokacija, koncna_lokacija){
       document.getElementById("avti").selectedIndex = i;
     }
   };
+  geocodeAddress(geocoder, map);
   document.getElementById('btn_cal').click(); //potrebno dopovedati textboxema, da mora besedilo vzeti kot autocomplete... da bosta markerja delala
 }
 
+function geocodeAddress(geocoder, map) {
+  geocoder.geocode({'address': zacetna_lokacija}, function(results, status) {
+    if (status === 'OK') {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: map,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+
+  geocoder.geocode({'address': koncna_lokacija}, function(results, status) {
+    if (status === 'OK') {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+        map: map,
+        position: results[0].geometry.location
+      });
+    } else {
+      alert('Geocode was not successful for the following reason: ' + status);
+    }
+  });
+}
 function Register(){
 	var username = document.getElementById("regUsr").value;
 	var password = document.getElementById("regPsw").value;

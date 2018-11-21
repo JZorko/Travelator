@@ -22,7 +22,7 @@
 	    }
 		}
     if($naziv_exist) {
-      $sql = sprintf("UPDATE Avtomobili SET poraba =%s WHERE id_avtomobila ='%s';", $_POST["consumption"], $naziv_exist_id);
+      $sql = sprintf("UPDATE Avtomobili SET poraba =%s WHERE id_avtomobila ='%s'AND username='%s';", $_POST["consumption"], $naziv_exist_id, $_POST["username"]);
       if ($conn->query($sql) === TRUE) {
         $conn->close();
         echo json_encode(array("status" => true, "added" => false, "updated" => true));
