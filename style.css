@@ -123,6 +123,28 @@ html, body {
   cursor: pointer;
 }
 
+#manform ul {
+  padding: 0;
+  margin: 0;
+}
+#manform ul li {
+  display: block;
+  padding: 10px;
+  border-bottom: 1px solid var(--border);
+  min-height: 42px;
+  overflow: hidden;
+  position: relative;
+}
+#manform ul li:last-of-type {
+  border-bottom: 0;
+}
+#manform ul li:hover {
+  background-color: var(--shady);
+}
+#manform ul li:active {
+  background-color: var(--border);
+}
+
 * {box-sizing: border-box;}
 
 /* Full-width input fields */
