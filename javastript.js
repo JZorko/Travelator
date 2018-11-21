@@ -678,11 +678,12 @@ function History(){
 function Path(){
 	var origin = document.getElementById("origin").value;
 	var destination = document.getElementById("destination").value;
+  var name = document.getElementById("avti").options[document.getElementById("avti").selectedIndex].text;
 	$.ajax({
     'url': './php/path.php',
     'type': 'POST',
     'dataType': 'json',
-    'data': {username:user, origin, destination},
+    'data': {username:user, origin, destination, name},
     'success': function(data)
 			{
 				if(data.pot_added)
@@ -703,6 +704,12 @@ function Path(){
         }
         else {
           console.log("Destination: FALSE");
+        }
+        if (data.status_avt) {
+          console.log("Avto: TRUE");
+        }
+        else {
+          console.log("Avto: FALSE");
         }
 			},
     'beforeSend': function()
