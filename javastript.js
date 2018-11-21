@@ -262,7 +262,7 @@ function initMap(){
 	});
 
 	$('#logForm').submit(function () {
-		Login();
+		Login(document.getElementById("logUsr").value, document.getElementById("logPsw").value);
 		return false;
 	});
 
@@ -305,6 +305,7 @@ function Register(){
 					{
 						console.log("User registered.")
 						document.getElementById('registerForm').style.display = "none";
+            Login(username, password);
 					}
 					else
 					{
@@ -325,9 +326,9 @@ function Register(){
 }
 
 
-function Login(){
-	var username = document.getElementById("logUsr").value;
-	var password = document.getElementById("logPsw").value;
+function Login(username, password){
+	//var username = document.getElementById("logUsr").value;
+	//var password = document.getElementById("logPsw").value;
 
 	$.ajax({
     'url': './php/login.php',
