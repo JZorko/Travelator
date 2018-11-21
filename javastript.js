@@ -26,7 +26,6 @@ function initMap(){
   var marker_origin;
 	var marker_destination;
 
-
 	async function Calculate(){
 		if(marker_origin != null && marker_destination != null){
 			var request = {
@@ -56,7 +55,7 @@ function initMap(){
 			function callback(response, status) {
 				if(user != "" && origin_enter.value != "" && destination_enter.value != ""){
 					var cars = document.getElementById("avti");
-					var selected_car_consumption = cars.options[cars.selectedIndex].value;
+				  var selected_car_consumption = cars.options[cars.selectedIndex].value;
 			    var liters = document.getElementById("liters");
 			    var euros = document.getElementById("euros");
 			    if(status=="OK") {
@@ -113,11 +112,12 @@ function initMap(){
 
 	var origin_enter = document.getElementById("origin");
 	var destination_enter = document.getElementById("destination");
+  var cars = document.getElementById("avti");
 
 	origin_enter.addEventListener("keyup", async function(event) {
 		if(event.keyCode === 13)
 			event.preventDefault();
-    if(document.getElementById('origin').value != "" && document.getElementById('destination').value != "")
+    if(document.getElementById('origin').value != "" && document.getElementById('destination').value != "" && cars.options[cars.selectedIndex] != undefined)
     {
   		await sleep(300);
 
@@ -135,7 +135,7 @@ function initMap(){
 	destination_enter.addEventListener("keyup", async function(event) {
 		if(event.keyCode === 13)
 			event.preventDefault();
-    if(document.getElementById('origin').value != "" && document.getElementById('destination').value != "")
+    if(document.getElementById('origin').value != "" && document.getElementById('destination').value != "" && cars.options[cars.selectedIndex] != undefined)
     {
   		await sleep(300);
 
@@ -208,7 +208,7 @@ function initMap(){
     }
 	}
 	document.getElementById('btn_cal').onclick= function () {
-    if(document.getElementById('origin').value != "" && document.getElementById('destination').value != "")
+    if(document.getElementById('origin').value != "" && document.getElementById('destination').value != "" && cars.options[cars.selectedIndex] != undefined)
     {
       Calculate();
   		if(user != "" && liters != null)
@@ -261,7 +261,7 @@ function initMap(){
 	});
 
 	$('#vnoForm').submit(function () {
-		Vnos();
+		Add_Update();
 		return false;
 	});
 }
@@ -385,7 +385,7 @@ function Logout(){
 	}
 }
 
-function Vnos(){
+function Add_Update(){
 	var name = document.getElementById("carName").value;
 	var consumption = document.getElementById("consumption").value;
 
@@ -394,7 +394,7 @@ function Vnos(){
 	console.log("Consumption: " + consumption);
 
 	$.ajax({
-    'url': './php/addCar.php',
+    'url': './php/add_updateCar.php',
     'type': 'POST',
     'dataType': 'json',
     'data': {username: user, name: name, consumption: consumption},
@@ -412,11 +412,19 @@ function Vnos(){
 					{
 						console.log("Car not added.");
 					}
+          if (data.updated) {
+            console.log("Car updated.");
+						document.getElementById('vnosForm').style.display = "none";
+						ImportUserCars();
+          }
+          else {
+            console.log("Car not updated.");
+          }
 				}
 			},
     'beforeSend': function()
 			{
-				console.log("Adding car.");
+				console.log("Adding/Updating car.");
 			},
     'error': function(data)
       {
@@ -434,13 +442,19 @@ function ImportUserCars(){
     'data': {username: user},
     'success': function(data)
 			{
-				document.getElementById("avti").options[0] = new Option(data[0].naziv, data[0].poraba, true, false);
+        if (data[0] != undefined) {
+          document.getElementById("avti").options[0] = new Option(data[0].naziv, data[0].poraba, true, false);
 
-				for(var i =  1; i < data.length; i++){
-					document.getElementById("avti").options[i] = new Option(data[i].naziv, data[i].poraba, false, false);
-				}
+  				for(var i =  1; i < data.length; i++){
+  					document.getElementById("avti").options[i] = new Option(data[i].naziv, data[i].poraba, false, false);
+  				}
 
-				console.log("Cars fetched.");
+  				console.log("Cars fetched.");
+        }
+        else {
+          console.log("No cars to fetch.");
+        }
+
 			},
     'beforeSend': function()
 			{

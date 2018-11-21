@@ -71,7 +71,7 @@
 		  <form id="vnoForm" class="modal-content" method="post">
 		    <div class="container">
 		    	<h1>Add a car</h1>
-		    	<p>Please fill in this form to add a car.</p>
+		    	<p>Please fill in this form to add a car or update an existing car's consumption.</p>
 					<hr>
 					<label for="name"><b>Name</b></label>
 					<input type="text" placeholder="Enter name for your car" name="name" id="carName" required>
@@ -79,7 +79,7 @@
 					<label for="consum"><b>Consumption</b></label>
 					<input type="text" placeholder="Enter consumption of your car (l/100km)" name="consum" id="consumption" pattern="[0-9]+(.[0-9])*[0-9]*"required>
 
-					<button type="submit">Add</button>
+					<button type="submit">Add/Update</button>
 		    </div>
 		    <div class="container" style="background-color:#f1f1f1">
 		      <button type="button" onclick="document.getElementById('vnosForm').style.display='none'"
@@ -140,7 +140,7 @@
 					<h4 class="header">Cars</h4>
 					<ul>
 						<li><select id="avti"></select></li>
-						<li id="btn_vnos">Add a Car</li>
+						<li id="btn_vnos">Add/Update a Car</li>
 						<li id="btn_del_car">Remove a Car</li>
 					</ul>
 				</div>
