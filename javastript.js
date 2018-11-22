@@ -397,7 +397,7 @@ function Login(username, password){
             admin = data.admin;
 
             if (admin == 1) {
-              document.getElementById('btn_manage_accounts').style.display = "block !important";
+              document.getElementById('btn_manage_accounts').style.display = "block";
   					}
 
 						ImportUserCars();
